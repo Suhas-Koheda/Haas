@@ -30,7 +30,7 @@ export default function RootLayout({
         <div className={"h-[5px] bg-[#b2823a]"}>
         </div>
         <Navigation/>
-        <ProgressBarProvider children={children}/>
+        <ProgressBarProvider >{children}</ProgressBarProvider>
         <Footer/>
         </body>
         </html>
