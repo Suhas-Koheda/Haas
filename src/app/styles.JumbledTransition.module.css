@@ -1,0 +1,27 @@
+.container {
+    color: #16161d;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100px;
+    padding: 0 60px;
+    background: var(--bg);
+}
+
+.text {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    transition: all 0.5s ease;
+}
+
+.jumbled {
+    color: #888;
+    opacity: 0.8;
+}
+
+.revealed {
+    color: #000;
+    opacity: 1;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
