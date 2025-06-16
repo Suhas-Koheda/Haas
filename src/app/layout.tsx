@@ -3,6 +3,7 @@ import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import {ProgressBarProvider} from "@/components/ProgressBarProvider";
 import Navigation from "@/components/NavBar";
+import {Footer} from "@/components/Footer";
 
 const jetbrainsMono = JetBrains_Mono({
     subsets: ["latin"],
@@ -30,6 +31,7 @@ export default function RootLayout({
         </div>
         <Navigation/>
         <ProgressBarProvider children={children}/>
+        <Footer/>
         </body>
         </html>
     );

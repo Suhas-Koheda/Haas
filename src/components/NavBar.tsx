@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Navigation() {
     return (
-        <nav className="w-full shadow-sm border-b bg-[#fff5e9] font-jetbrains-mono font-extrabold">
+        <nav className="w-full shadow-sm border-b bg-[#fff5e9] font-jetbrains-mono font-extrabold sticky">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     {/*/!* Logo/Brand - optional *!/*/}

@@ -4,15 +4,16 @@
     justify-content: flex-start;
     align-items: center;
     min-height: 100px;
-    padding: 0 60px;
+    padding: 2rem clamp(1rem, 5vw, 3.75rem); /* Responsive padding */
     background: var(--bg);
 }
 
 .text {
-    font-size: 2.5rem;
+    font-size: clamp(1.5rem, 5vw, 2.5rem); /* Responsive font size */
     font-weight: bold;
     text-align: center;
     transition: all 0.5s ease;
+    margin: 0.5rem 0;
 }
 
 .jumbled {
@@ -24,4 +25,21 @@
     color: #000;
     opacity: 1;
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.animatedName {
+    background: linear-gradient(45deg, #c3756d, #c13c24, #d5a86b, #b37e3c);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 5s ease infinite;
+    font-size: clamp(1rem, 3vw, 1.5rem); /* Responsive font size */
+    justify-content: center;
+    flex-wrap: wrap; /* For small screens */
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
