@@ -101,7 +101,7 @@ const Name = () => {
             >
                 {/*<h2 className="text-3xl font-bold mb-4 ">Who am I?</h2>*/}
                 <p className="text-lg text-muted-foreground">
-                    I'm a B.Tech student at VIT Chennai passionate about Android, full-stack development, and AI. I contribute to open-source (like LangChain4j) and love building impactful projects.
+                    I&apos;m a B.Tech student at VIT Chennai passionate about Android, full-stack development, and AI. I contribute to open-source (like LangChain4j) and love building impactful projects.
                 </p>
             </motion.section>
         </div>
