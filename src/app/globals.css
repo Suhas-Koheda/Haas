@@ -125,3 +125,24 @@
   }
 }
 
+.theme-toggle-button {
+  padding: 8px 16px;
+  border: 1px solid var(--foreground);
+  border-radius: var(--radius);
+  background-color: var(--background);
+  color: var(--foreground);
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Added for smooth transition */
+}
+
+.theme-toggle-button:hover {
+  /* Example hover effect: slightly change background or brightness */
+  /* This depends on how you want hover to look with your variables */
+  /* For example, using a slightly lighter/darker fixed shade or another variable if defined */
+  filter: brightness(0.9); /* Adjust brightness on hover for simple feedback */
+}
+
+.dark .theme-toggle-button:hover {
+    filter: brightness(1.2); /* Adjust brightness differently for dark mode */
+}

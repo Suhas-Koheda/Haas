@@ -34,15 +34,7 @@ const ThemeToggle = () => {
     return (
         <button
             onClick={toggleTheme}
-            style={{
-                padding: '8px 16px',
-                border: '1px solid var(--foreground)',
-                borderRadius: 'var(--radius)',
-                background: 'var(--background)',
-                color: 'var(--foreground)',
-                cursor: 'pointer',
-                fontSize: '14px'
-            }}
+            className="theme-toggle-button"
         >
             {isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
         </button>
