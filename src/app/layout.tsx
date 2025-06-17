@@ -27,7 +27,7 @@ export default function RootLayout({
         <body
             className={`${jetbrainsMono.variable} font-mono antialiased`}
         >
-        <div className={"h-[5px] bg-[#b2823a]"}>
+        <div className={"h-[5px] bg-[var(--foreground)]"}>
         </div>
         <Navigation/>
         <ProgressBarProvider >{children}</ProgressBarProvider>
