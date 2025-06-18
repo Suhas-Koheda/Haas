@@ -1,13 +1,13 @@
 "use client";
 import React from 'react';
 import {
-    Moon, Sun, Code, Database, Server, Globe,
+     Code, Database, Server, Globe,
     Smartphone, Cloud, Palette, Layers
 } from 'lucide-react';
-import { useTheme } from './ThemeProvider'; // Update this path based on your structure
+import { useTheme } from './ThemeProvider';
 
 const TechTagsComponent = () => {
-    const { theme, toggleTheme } = useTheme();
+    const { theme } = useTheme();
     const isDarkMode = theme === 'dark';
 
     const categoryColors: Record<string, string> = {
