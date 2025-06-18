@@ -65,8 +65,9 @@ const Name = () => {
                             aria-hidden="true"
                         >
                             <div className="flex items-start justify-between">
-                            <BriefcaseBusiness className={"mt-0.5 mx-1"}/>{SUBTITLE_TEXT.map((letter, index) => (
+                            <BriefcaseBusiness className={"mx-1 p-1 md:mt-1 md:p-0"}/>{SUBTITLE_TEXT.map((letter, index) => (
                                 <motion.span
+                                    className={"mt-0.3"}
                                     key={index}
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
