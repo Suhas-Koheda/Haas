@@ -49,10 +49,10 @@ const Name = () => {
     }, [jumbled]);
 
     return (
-        < div className={"bg-[#fff5e9] text-foreground"}>
+        <div className={"bg-[var(--bg)] text-[var(--foreground)]"}>
             <div className={styles.container} aria-label="Suhas Koheda, Backend Developer">
                 <div className="flex flex-col items-center space-y-0">
-                    <div className="flex flex-col items-center bg-[#fff5e9]">
+                    <div className="flex flex-col items-center bg-[var(--bg)]">
                         <h1
                             className={`${styles.text} ${jumbled ? styles.jumbled : styles.revealed}`}
                             aria-live="polite"
@@ -97,7 +97,7 @@ const Name = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1.2 }}
-                className="max-w-5xl px-16 bg-[#fff5e9]"
+                className="max-w-5xl px-2 bg-[var(--bg)]"
             >
                 {/*<h2 className="text-3xl font-bold mb-4 ">Who am I?</h2>*/}
                 <p className="text-lg text-muted-foreground">
@@ -109,3 +109,4 @@ const Name = () => {
 };
 
 export default Name;
+

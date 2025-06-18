@@ -4,6 +4,7 @@ import "./globals.css";
 import {ProgressBarProvider} from "@/components/ProgressBarProvider";
 import Navigation from "@/components/NavBar";
 import {Footer} from "@/components/Footer";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const jetbrainsMono = JetBrains_Mono({
     subsets: ["latin"],
@@ -27,12 +28,16 @@ export default function RootLayout({
         <body
             className={`${jetbrainsMono.variable} font-mono antialiased`}
         >
-        <div className={"h-[5px] bg-[#b2823a]"}>
-        </div>
-        <Navigation/>
-        <ProgressBarProvider >{children}</ProgressBarProvider>
-        <Footer/>
+        <ThemeProvider>
+            <div className={"h-[5px]"} style={{ background: "var(--aztec)" }} />
+            <div className="px-4 sm:px-8 md:px-16 lg:px-32 xl:px-48 2xl:px-64">
+                <Navigation/>
+                <ProgressBarProvider >{children}</ProgressBarProvider>
+                <Footer/>
+            </div>
+        </ThemeProvider>
         </body>
         </html>
     );
 }
+

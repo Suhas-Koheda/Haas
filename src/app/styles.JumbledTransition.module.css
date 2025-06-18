@@ -1,10 +1,10 @@
 .container {
-    color: #16161d;
+    color: var(--foreground);
     display: flex;
     justify-content: flex-start;
     align-items: center;
     min-height: 100px;
-    padding: 2rem clamp(1rem, 5vw, 3.75rem); /* Responsive padding */
+
     background: var(--bg);
 }
 
@@ -14,21 +14,22 @@
     text-align: center;
     transition: all 0.5s ease;
     margin: 0.5rem 0;
+    color: var(--foreground);
 }
 
 .jumbled {
-    color: #888;
+    color: var(--muted-foreground);
     opacity: 0.8;
 }
 
 .revealed {
-    color: #000;
+    color: var(--foreground);
     opacity: 1;
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .animatedName {
-    background: linear-gradient(45deg, #c3756d, #c13c24, #d5a86b, #b37e3c);
+    background: linear-gradient(45deg, var(--primary), var(--destructive), var(--aztec), var(--sidebar-primary));
     background-size: 300% 300%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -43,3 +44,4 @@
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
+
