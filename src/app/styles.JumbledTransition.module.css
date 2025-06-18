@@ -29,7 +29,7 @@
 }
 
 .animatedName {
-    background: linear-gradient(45deg, var(--primary), var(--destructive), var(--aztec),var(--primary) );
+    background:var(--accent-foreground);
     background-size: 300% 300%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

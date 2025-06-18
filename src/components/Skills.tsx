@@ -11,13 +11,13 @@ const TechTagsComponent = () => {
     const isDarkMode = theme === 'dark';
 
     const categoryColors: Record<string, string> = {
-        language: 'bg-blue-100 text-blue-800 border-blue-300 hover:bg-blue-200',
-        framework: 'bg-green-100 text-green-800 border-green-300 hover:bg-green-200',
-        platform: 'bg-purple-100 text-purple-800 border-purple-300 hover:bg-purple-200',
-        database: 'bg-yellow-100 text-yellow-800 border-yellow-300 hover:bg-yellow-200',
-        api: 'bg-red-100 text-red-800 border-red-300 hover:bg-red-200',
-        server: 'bg-pink-100 text-pink-800 border-pink-300 hover:bg-pink-200',
-        design: 'bg-orange-100 text-orange-800 border-orange-300 hover:bg-orange-200',
+        language: 'text-gray-800 border-gray-300 ',
+        framework: '  text-gray-800 border-gray-300   ',
+        platform: '  text-gray-800 border-gray-300   ',
+        database: '  text-gray-800 border-gray-300   ',
+        api: '  text-gray-800 border-gray-300   ',
+        server: '  text-gray-800 border-gray-300   ',
+        design: '  text-gray-800 border-gray-300   ',
     };
 
     const techData = [
@@ -59,7 +59,7 @@ const TechTagsComponent = () => {
               inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs sm:px-4 sm:py-2 sm:text-sm font-medium border
               transition-transform duration-200 hover:scale-105 hover:shadow-sm
               cursor-pointer select-none
-              ${isDarkMode ? 'bg-gray-800 text-white border-gray-600 hover:bg-gray-700' : categoryColors[tech.category]}
+              ${isDarkMode ? ' text-white border-gray-600 ' : categoryColors[tech.category]}
             `}
                     >
                         {tech.icon}

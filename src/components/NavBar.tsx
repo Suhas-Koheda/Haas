@@ -14,7 +14,7 @@ export default function Navigation() {
 
     return (
         <nav
-            className="w-full shadow-sm border-b font-jetbrains-mono font-extrabold sticky top-0 z-50"
+            className="w-full  font-jetbrains-mono font-extrabold sticky top-0 z-50"
             style={{ background: "var(--bg)" }}
         >
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
