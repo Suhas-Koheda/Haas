@@ -1,9 +1,9 @@
 "use client"
-"use client"
 import Link from "next/link";
 import { useTheme } from "./ThemeProvider";
-import { Sun, Moon, Menu, X, Home as HomeIcon, UserCircle, Briefcase, Edit, Microscope, FileText } from "lucide-react"; // Added more icons
-import { useState, useEffect } from "react";
+import { Sun, Moon, Menu, X, Home as HomeIcon, Briefcase, Edit, Microscope, FileText } from "lucide-react"; // Added more icons
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from 'next/navigation'; // To handle active link and project link behavior
 
 export default function Navigation() {

@@ -1,5 +1,5 @@
 "use client";
-import { Briefcase, Users, Edit3, CalendarDays } from 'lucide-react';
+import { Briefcase, Users, CalendarDays } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface ExperienceItemProps {
@@ -49,7 +49,6 @@ const experienceData = [
     duration: 'Sept 2024 – Present',
     descriptionPoints: [
       'Developed web applications using React/Next.js with high performance scores.',
-      'Optimized load times through code improvements and best practices.',
     ],
     type: 'work' as 'work' | 'responsibility',
   },
@@ -59,7 +58,6 @@ const experienceData = [
     duration: 'Oct 2024 – Present',
     descriptionPoints: [
       'Contributed to multiple open-source projects with numerous merged PRs.',
-      'Mentored students in open-source workflows and Git best practices.',
     ],
     type: 'work' as 'work' | 'responsibility',
   },

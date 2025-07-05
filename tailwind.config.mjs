@@ -1,4 +1,4 @@
-import { fontFamily } from 'tailwindcss/defaultTheme';
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -11,8 +11,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        mono: ['var(--font-jetbrains-mono)', ...fontFamily.mono],
-        sans: ['var(--font-inter)', ...fontFamily.sans], // Added Inter as a default sans-serif, will add to layout.tsx
+        mono: ['var(--font-jetbrains-mono)', ...defaultTheme.fontFamily.mono],
+        sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans], // Added Inter as a default sans-serif, will add to layout.tsx
       },
       colors: {
         aztec: 'var(--aztec)', // Use CSS variables for consistency

@@ -9,7 +9,7 @@ import Link from 'next/link'; // Added Link
 
 const TARGET_TEXT = "Suhas Koheda";
 const JUMBLE_CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const SUBTITLE_TEXT = "Aspiring Software Engineer | AIML Student".split(""); // Updated Subtitle
+const SUBTITLE_TEXT = "Aspiring Software Engineer | AIML Student \nFighting Gradle Errors at 3AM with 4MBPS".split("\n");
 const JUMBLE_DURATION = 1000;
 const JUMBLE_INTERVAL = 20;
 const LETTER_ANIMATION_DELAY = 0.08; // Slightly faster animation
@@ -34,7 +34,7 @@ const Name = () => {
 
         const jumbleIntervalId = setInterval(() => {
             if (jumbled) {
-                setDisplayText(prevText => getJumbledText(TARGET_TEXT));
+                setDisplayText(() => getJumbledText(TARGET_TEXT));
             }
         }, JUMBLE_INTERVAL);
 
@@ -67,7 +67,7 @@ const Name = () => {
                             className={`${styles.animatedName} w-full justify-start text-lg sm:text-xl text-muted-foreground`} // Responsive text size
                             aria-hidden="true"
                         >
-                            <div className="flex items-start justify-start w-full">
+                            <div className="flex flex-col items-start justify-start w-full">
                                 {SUBTITLE_TEXT.map((letter, index) => (
                                     <motion.span
                                         className="mt-1" // Adjusted margin
@@ -121,7 +121,7 @@ const Name = () => {
                     >
                         {/* Decorative element, kept as is */}
                         <div className="relative group">
-                            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10 blur-md">
+                            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#af8041] via-[#af8041] to-[#af8041] opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10 blur-md">
                             </div>
                         </div>
                     </motion.div>

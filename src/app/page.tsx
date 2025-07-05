@@ -10,12 +10,12 @@ export default function Home() {
     return (
         <main className="flex flex-col items-center bg-[var(--bg)]">
             <Name />
-            <Education />
+            <ContributionsPage />
             <Skills />
-            <Projects /> {/* This component has id="projects-section" internally */}
+            <Projects /> 
             <OpenSourceContributions />
             <Experience />
-            <ContributionsPage /> {/* Wakatime stats */}
+            <Education />
         </main>
     );
 }

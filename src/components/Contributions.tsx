@@ -1,6 +1,7 @@
 "use client";
 import { Github } from "lucide-react";
 import {useTheme} from "@/components/ThemeProvider";
+import Image from "next/image";
 
 export function ContributionsPage() {
     const { theme } = useTheme()
@@ -34,15 +35,19 @@ export function ContributionsPage() {
                         </div>
                         <div className="relative w-full overflow-x-auto scrollbar-hide flex items-center justify-center">
                             <div className="min-w-[600px]">
-                                <img
+                                <Image
                                     src={lightModeSVG}
                                     alt="Coding activity chart light"
                                     className={`w-full h-full ${theme === 'dark' ? 'hidden' : 'block'}`}
+                                    width={800}
+                                    height={400}
                                 />
-                                <img
+                                <Image
                                     src={darkModeSVG}
                                     alt="Coding activity chart dark"
                                     className={`w-full h-full ${theme === 'dark' ? 'block' : 'hidden'}`}
+                                    width={800}
+                                    height={400}
                                 />
                             </div>
                         </div>

@@ -1,6 +1,6 @@
 "use client";
 import Link from 'next/link';
-import { Microscope, Lightbulb } from 'lucide-react';
+import { Lightbulb } from 'lucide-react';
 
 export default function ResearchPage() {
   return (

@@ -1,5 +1,5 @@
 "use client";
-import { GitMerge, Package, Code, ExternalLink, Star } from 'lucide-react';
+import { GitMerge, Package, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface Contribution {
@@ -13,10 +13,10 @@ interface Contribution {
 
 const contributionsData: Contribution[] = [
   {
-    name: 'Spring Boot Starter for Vertex AI Gemini',
-    description: 'Implemented Spring Boot starter configuration for Google\'s Vertex AI Gemini Pro & Vision models, enabling seamless integration within the LangChain4j framework. This contribution is published to Maven Central.',
-    technologies: ['Java', 'Spring Boot', 'LangChain4j', 'Google Cloud Vertex AI', 'Gemini API'],
-    prLink: 'https://github.com/langchain4j/langchain4j-spring/pull/131',
+    name: 'Spring Boot Starter for Gemini AI',
+    description: 'Implemented Spring Boot starter configuration for Google\'s AI Gemini Pro, enabling seamless integration within the LangChain4j framework. This contribution is published to Maven Central.',
+    technologies: ['Java', 'Spring Boot', 'LangChain4j', 'Gemini API'],
+    prLink: 'https://github.com/langchain4j/langchain4j-spring/pull/74',
     mavenLink: 'https://central.sonatype.com/artifact/dev.langchain4j/langchain4j-spring-boot-starter-vertex-ai-gemini',
     org: 'LangChain4j'
   },

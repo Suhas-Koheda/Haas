@@ -1,34 +1,20 @@
 "use client";
 import React from 'react';
 import {
-    Code, Database, Server, Globe, Smartphone, Cloud, GitMerge, Terminal, SearchCheck // Added GitMerge, Terminal, SearchCheck
+    Code, Database, Server, Globe, Smartphone, GitMerge, Terminal, SearchCheck
 } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
 
-const Skills = () => { // Renamed component to Skills
+const Skills = () => {
     const { theme } = useTheme();
     const isDarkMode = theme === 'dark';
 
-    // Define base colors for light mode, dark mode will invert or use theme variables
-    const categoryStyles: Record<string, { bg: string, text: string, border: string, icon: string }> = {
-        language: { bg: 'bg-sky-100', text: 'text-sky-800', border: 'border-sky-300', icon: 'text-sky-600' },
-        framework: { bg: 'bg-emerald-100', text: 'text-emerald-800', border: 'border-emerald-300', icon: 'text-emerald-600' },
-        platform: { bg: 'bg-indigo-100', text: 'text-indigo-800', border: 'border-indigo-300', icon: 'text-indigo-600' },
-        database: { bg: 'bg-rose-100', text: 'text-rose-800', border: 'border-rose-300', icon: 'text-rose-600' },
-        tool: { bg: 'bg-amber-100', text: 'text-amber-800', border: 'border-amber-300', icon: 'text-amber-600' },
-        api: { bg: 'bg-purple-100', text: 'text-purple-800', border: 'border-purple-300', icon: 'text-purple-600' },
+    const baseStyles = {
+        bg: isDarkMode ? 'bg-neutral-800/30' : 'bg-neutral-100',
+        text: isDarkMode ? 'text-neutral-300' : 'text-neutral-800',
+        border: isDarkMode ? 'border-neutral-700' : 'border-neutral-300',
+        icon: isDarkMode ? 'text-neutral-400' : 'text-neutral-600'
     };
-
-    // Dark mode specific styles
-    const darkCategoryStyles: Record<string, { bg: string, text: string, border: string, icon: string }> = {
-        language: { bg: 'bg-sky-800/30', text: 'text-sky-300', border: 'border-sky-700', icon: 'text-sky-400' },
-        framework: { bg: 'bg-emerald-800/30', text: 'text-emerald-300', border: 'border-emerald-700', icon: 'text-emerald-400' },
-        platform: { bg: 'bg-indigo-800/30', text: 'text-indigo-300', border: 'border-indigo-700', icon: 'text-indigo-400' },
-        database: { bg: 'bg-rose-800/30', text: 'text-rose-300', border: 'border-rose-700', icon: 'text-rose-400' },
-        tool: { bg: 'bg-amber-800/30', text: 'text-amber-300', border: 'border-amber-700', icon: 'text-amber-400' },
-        api: { bg: 'bg-purple-800/30', text: 'text-purple-300', border: 'border-purple-700', icon: 'text-purple-400' },
-    };
-
 
     const techData = [
         { name: 'Java', icon: <Code size={16} />, category: 'language' },
@@ -53,33 +39,30 @@ const Skills = () => { // Renamed component to Skills
     ];
 
     return (
-        <div className={`py-12 sm:py-16 px-4`}> {/* Removed min-h-screen, added padding */}
+        <div className={`py-12 sm:py-16 px-4`}>
             <div className="max-w-5xl mx-auto">
                 <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 text-[var(--foreground)]">
                     My Tech Arsenal
                 </h2>
 
                 <div className="flex flex-wrap gap-3 sm:gap-4 justify-center">
-                    {techData.map((tech) => {
-                        const styles = isDarkMode ? darkCategoryStyles[tech.category] : categoryStyles[tech.category];
-                        return (
-                            <div
-                                key={tech.name}
-                                className={`
-                                    inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-medium border
-                                    transition-all duration-200 hover:shadow-md hover:scale-105 cursor-default select-none
-                                    ${styles.bg} ${styles.text} ${styles.border}
-                                `}
-                            >
-                                <span className={styles.icon}>{tech.icon}</span>
-                                <span>{tech.name}</span>
-                            </div>
-                        );
-                    })}
+                    {techData.map((tech) => (
+                        <div
+                            key={tech.name}
+                            className={`
+                                inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-medium border
+                                transition-all duration-200 hover:shadow-md hover:scale-105 cursor-default select-none
+                                ${baseStyles.bg} ${baseStyles.text} ${baseStyles.border}
+                            `}
+                        >
+                            <span className={baseStyles.icon}>{tech.icon}</span>
+                            <span>{tech.name}</span>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>
     );
 };
 
-export default Skills; // Exporting Skills
+export default Skills;

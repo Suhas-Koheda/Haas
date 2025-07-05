@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useMemo } from 'react';
-import { Github, ExternalLink, Briefcase, Code, Filter } from 'lucide-react';
+import { Github, ExternalLink, Briefcase, Filter } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from './ThemeProvider'; // Assuming you have a ThemeProvider
 
@@ -11,7 +11,7 @@ interface Project {
   technologies: string[];
   githubLink: string;
   liveLink?: string;
-  primaryLanguage: 'Kotlin' | 'Java' | 'JavaScript' | 'Python' | 'HTML' | 'Other';
+  primaryLanguage: 'Kotlin' | 'Java' | 'JavaScript' | 'Python' | 'HTML' | 'TypeScript' | 'Web3' | 'Other';
   details?: string[]; // Optional more detailed bullet points
 }
 
@@ -20,12 +20,13 @@ const projectsData: Project[] = [
     id: 'resume-matcher',
     name: 'Resume Matcher',
     description: 'AI-powered resume analysis backend that evaluates resume-job description compatibility. Implemented PDF processing, AI integration with Gemini API, and RESTful endpoints.',
-    technologies: ['JavaScript', 'Node.js', 'Express', 'Multer', 'Langchain4j (conceptual)', 'Gemini API (conceptual)'], // Adjusted based on RM repo (JavaScript) and resume concept
+    technologies: ['Kotlin', 'Spring Boot', 'PostgreSQL', 'Multer', 'Langchain4j', 'Gemini API'],
     githubLink: 'https://github.com/Suhas-Koheda/RM',
-    primaryLanguage: 'JavaScript',
+    primaryLanguage: 'Kotlin',
     details: [
       "Designed REST API endpoints for file uploads and analysis requests.",
-      "Conceptualized AI integration for text analysis and match scoring."
+      "Implemented AI integration for text analysis and match scoring.",
+      "Built with Kotlin and Spring Boot for robust backend performance."
     ]
   },
   {
@@ -72,10 +73,16 @@ const projectsData: Project[] = [
   {
     id: 'automated-manager',
     name: 'Automated Manager',
-    description: 'A Python-based automation tool. (Further details would be added based on README or project specifics).',
-    technologies: ['Python', 'Scripting'], // General placeholder
+    description: 'A Python-based automation tool with Jupyter notebooks for data analysis and visualization, implementing machine learning algorithms and data processing pipelines.',
+    technologies: ['Python', 'Jupyter Notebook', 'Pandas', 'NumPy', 'Matplotlib', 'Scikit-learn'],
     githubLink: 'https://github.com/Suhas-Koheda/AutomatedManager',
     primaryLanguage: 'Python',
+    details: [
+      "Created data visualization dashboards using Matplotlib and Seaborn",
+      "Implemented machine learning models with Scikit-learn",
+      "Developed interactive notebooks for data exploration and analysis",
+      "Maintained notebook-based workflows available on GitHub for reproducibility"
+    ]
   },
   {
     id: 'nature-for-future',
@@ -85,9 +92,64 @@ const projectsData: Project[] = [
     githubLink: 'https://github.com/Suhas-Koheda/Nature-for-future',
     primaryLanguage: 'HTML',
   },
+  {
+    id: 'dusky-muse',
+    name: 'The Dusky Muse',
+    description: 'Freelance frontend web development project with modern UI design, responsive layouts, and optimized performance.',
+    technologies: ['TypeScript', 'React', 'Next.js', 'Tailwind CSS', 'Framer Motion'],
+    githubLink: 'https://github.com/Suhas-Koheda',
+    liveLink: 'https://theduskymuse.com/',
+    primaryLanguage: 'TypeScript',
+    details: [
+      "Designed and implemented a responsive, modern frontend with TypeScript and Next.js",
+      "Created smooth animations and transitions using Framer Motion",
+      "Optimized for performance and SEO with Next.js best practices"
+    ]
+  },
+  {
+    id: 'juphack',
+    name: 'JupHack Project',
+    description: 'Web3 contribution focusing on blockchain integration and decentralized applications. Implementing smart contract functionality and blockchain infrastructure.',
+    technologies: ['Solidity', 'Web3.js', 'Ethereum', 'Smart Contracts', 'DApps'],
+    githubLink: 'https://github.com/Suhas-Koheda/juphack',
+    primaryLanguage: 'Web3',
+    details: [
+      "Implemented smart contract functionality with Solidity",
+      "Integrated Web3.js for blockchain interactions",
+      "Developed decentralized application architecture"
+    ]
+  },
+  {
+    id: 'bingo-social',
+    name: 'Bingo Social',
+    description: 'A social media web application built during DevsHouse Hackathon 2025. Features include user authentication, posts with likes/comments, real-time notifications, and responsive design.',
+    technologies: ['TypeScript', 'Next.js', 'Tailwind CSS', 'Shadcn UI', 'Clerk', 'MongoDB', 'Hackathon'],
+    githubLink: 'https://github.com/krishkalaria12/bingo',
+    liveLink: 'https://bingo-social.vercel.app/',
+    primaryLanguage: 'TypeScript',
+    details: [
+      "Built a complete social media platform within 48 hours during DevsHouse 2025",
+      "Implemented user authentication, profiles, and social interactions",
+      "Created responsive UI with Tailwind CSS and Shadcn components"
+    ]
+  },
+  {
+    id: 'fetchhive',
+    name: 'FetchHive',
+    description: 'A job board application developed during HackNight. Allows users to browse, filter and apply for job listings with a modern UI and efficient state management.',
+    technologies: ['TypeScript', 'React', 'Next.js', 'Tailwind CSS', 'Redux', 'Framer Motion', 'Hackathon'],
+    githubLink: 'https://github.com/krishkalaria12/fetchhive',
+    liveLink: 'https://fetch-hive.vercel.app/',
+    primaryLanguage: 'TypeScript',
+    details: [
+      "Developed during HackNight as a comprehensive job search platform",
+      "Built with TypeScript and Next.js for type-safety and performance",
+      "Implemented responsive filtering and search functionality"
+    ]
+  },
 ];
 
-const languageFilters: Array<'All' | Project['primaryLanguage']> = ['All', 'Kotlin', 'Java', 'JavaScript', 'Python', 'HTML'];
+const languageFilters: Array<'All' | Project['primaryLanguage']> = ['All', 'Kotlin', 'Java', 'Python', 'HTML', 'TypeScript', 'Web3'];
 
 
 const Projects = () => {
@@ -102,7 +164,8 @@ const Projects = () => {
     return projectsData.filter(project => project.primaryLanguage === selectedLanguage);
   }, [selectedLanguage]);
 
-  const cardVariants = {
+  // Define a custom function for the variants to resolve type issues
+  const getCardVariants = () => ({
     hidden: { opacity: 0, y: 20 },
     visible: (i: number) => ({
       opacity: 1,
@@ -110,11 +173,11 @@ const Projects = () => {
       transition: {
         delay: i * 0.1,
         duration: 0.4,
-        ease: "easeOut"
+        ease: "easeInOut" as const
       }
     }),
     exit: { opacity: 0, y: -20, transition: { duration: 0.2 } }
-  };
+  });
 
 
   return (
@@ -149,7 +212,7 @@ const Projects = () => {
               <motion.div
                 key={project.id}
                 custom={index}
-                variants={cardVariants}
+                variants={getCardVariants()}
                 initial="hidden"
                 animate="visible"
                 exit="exit"
@@ -178,7 +241,7 @@ const Projects = () => {
                     <div className="flex flex-wrap gap-1.5">
                       {project.technologies.map(tech => (
                         <span key={tech} className={`px-2 py-0.5 text-xs rounded-full
-                          ${isDarkMode ? 'bg-sky-800/50 text-sky-300 border border-sky-700/50' : 'bg-sky-100 text-sky-700 border border-sky-200'}`}>
+                          ${isDarkMode ? 'bg-[#af8041]/20 text-[#af8041] border border-[#af8041]/40' : 'bg-[#af8041]/10 text-[#af8041] border border-[#af8041]/30'}`}>
                           {tech} {/* Tech tags can be sans-serif for readability */}
                         </span>
                       ))}
