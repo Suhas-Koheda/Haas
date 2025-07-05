@@ -37,9 +37,11 @@ export default function RootLayout({
             >
                 <ThemeProvider > 
                     <div className={"h-[5px]"} style={{ background: "var(--primary)" }} /> {/* Use primary color for accent bar */}
-                    <div className="px-4 md:px-8 lg:px-16 xl:px-28"> {/* Adjusted padding for better responsiveness */}
+                    <div className="px-4 md:px-8 lg:px-16 xl:px-28 min-h-screen flex flex-col"> {/* Use flexbox for fixed footer */}
                         <Navigation />
-                        <ProgressBarProvider>{children}</ProgressBarProvider>
+                        <div className="flex-grow pb-28"> {/* Increased padding to ensure content isn't hidden under fixed footer */}
+                            <ProgressBarProvider>{children}</ProgressBarProvider>
+                        </div>
                         <Footer />
                     </div>
                 </ThemeProvider>

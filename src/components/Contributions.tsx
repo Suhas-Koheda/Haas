@@ -10,7 +10,7 @@ export function ContributionsPage() {
     const darkModeSVG = "https://wakatime.com/share/@018d187a-e9e9-413d-bc20-e3e9ce647cd0/9a13bc07-bdbd-4a20-8857-843998d3f4c0.svg";
 
     return (
-        <div className="px-2">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="py-8">
                 <div className="w-full">
                     <div className="border border-border rounded-2xl shadow-xl p-4 sm:p-6 lg:p-8">
@@ -34,7 +34,7 @@ export function ContributionsPage() {
                             </a>
                         </div>
                         <div className="relative w-full overflow-x-auto scrollbar-hide flex items-center justify-center">
-                            <div className="min-w-[600px]">
+                            <div className="min-w-[300px] px-12">
                                 <Image
                                     src={lightModeSVG}
                                     alt="Coding activity chart light"

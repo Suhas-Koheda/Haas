@@ -5,9 +5,9 @@ export function Footer() {
     const year = new Date().getFullYear();
 
     return (
-        <footer className="w-full border-t border-[var(--border)] mt-12"> {/* Changed to footer semantically, added margin-top */}
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex flex-col sm:flex-row justify-between items-center py-6 space-y-4 sm:space-y-0">
+        <footer className="fixed bottom-0 left-0 right-0 backdrop-blur-md border-t border-[var(--border)] z-50 w-full ">
+            <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+                <div className="flex flex-col sm:flex-row justify-between items-center py-4 space-y-4 sm:space-y-0">
                     <div className="text-sm text-[var(--muted-foreground)]">
                         © {year} Suhas Koheda. All rights reserved.
                     </div>
@@ -17,7 +17,7 @@ export function Footer() {
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="Suhas Koheda's GitHub Profile"
-                            className="text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors duration-200"
+                            className="p-2 rounded-full hover:bg-white/10 transition-all duration-300 text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
                         >
                             <Github size={20} />
                         </Link>
@@ -26,25 +26,25 @@ export function Footer() {
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="Suhas Koheda's LinkedIn Profile"
-                            className="text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors duration-200"
+                            className="p-2 rounded-full hover:bg-white/10 transition-all duration-300 text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
                         >
                             <Linkedin size={20} />
                         </Link>
                         <Link
-                            href="https://x.com/haasbroo" // Updated Twitter link
+                            href="https://x.com/haasbroo"
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="Suhas Koheda's Twitter Profile"
-                            className="text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors duration-200"
+                            className="p-2 rounded-full hover:bg-white/10 transition-all duration-300 text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
                         >
                             <Twitter size={20} />
                         </Link>
                         <Link
-                            href="https://instagram.com/suhas_sharma_k" // Updated Instagram link
+                            href="https://instagram.com/suhas_sharma_k"
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="Suhas Koheda's Instagram Profile"
-                            className="text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors duration-200"
+                            className="p-2 rounded-full hover:bg-white/10 transition-all duration-300 text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
                         >
                             <Instagram size={20} />
                         </Link>

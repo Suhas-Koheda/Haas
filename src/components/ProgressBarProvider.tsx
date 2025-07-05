@@ -4,12 +4,12 @@ import {AppProgressBar} from "next-nprogress-bar";
 
 export function ProgressBarProvider({ children }: { children: ReactNode }) {
     return (
-        <div>
+        <>
             {children}
             <AppProgressBar height="4px"
                             color="#b2823a"
                             options={{ showSpinner: false }}
                             shallowRouting/>
-        </div>
+        </>
     )
 }
