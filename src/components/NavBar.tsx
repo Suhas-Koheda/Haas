@@ -1,114 +1,127 @@
 "use client"
+"use client"
 import Link from "next/link";
 import { useTheme } from "./ThemeProvider";
-import { Sun, Moon, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { Sun, Moon, Menu, X, Home as HomeIcon, UserCircle, Briefcase, Edit, Microscope, FileText } from "lucide-react"; // Added more icons
+import { useState, useEffect } from "react";
+import { usePathname } from 'next/navigation'; // To handle active link and project link behavior
 
 export default function Navigation() {
     const { theme, toggleTheme } = useTheme();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const pathname = usePathname();
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
 
+    const closeMobileMenu = () => {
+        setIsMobileMenuOpen(false);
+    }
+
+    const navLinks = [
+        { href: "/", label: "Home", icon: <HomeIcon size={16} /> },
+        { href: "/#projects-section", label: "Projects", icon: <Briefcase size={16} /> },
+        { href: "/resume", label: "Resume", icon: <FileText size={16} /> },
+        { href: "/blog", label: "Blog", icon: <Edit size={16} /> },
+        { href: "/research", label: "Research", icon: <Microscope size={16} /> },
+    ];
+
+    // Smooth scroll for hash links
+    const handleProjectsLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+        closeMobileMenu();
+        if (href.startsWith("/#")) {
+            if (pathname === "/") { // If already on homepage, smooth scroll
+                e.preventDefault();
+                const targetId = href.substring(2); // Remove '/#'
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: "smooth" });
+                }
+            }
+            // If not on homepage, Next.js Link will navigate to homepage and then browser handles hash
+        }
+    };
+
+
     return (
         <nav
-            className="w-full  font-jetbrains-mono font-extrabold sticky top-0 z-50"
-            style={{ background: "var(--bg)" }}
+            className="w-full font-sans sticky top-0 z-50 backdrop-blur-md bg-[var(--bg-transparent)] border-b border-[var(--border)] shadow-sm"
         >
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
+                    {/* Logo/Home link */}
+                    <Link href="/" className="flex items-center text-xl font-bold text-[var(--primary)] hover:opacity-80 transition-opacity" onClick={closeMobileMenu}>
+                        {/* Optional: <UserCircle size={24} className="mr-2"/> */}
+                        Suhas Koheda
+                    </Link>
+
                     {/* Desktop Navigation */}
-                    <div className="hidden md:flex flex-1 justify-center lg:justify-start">
-                        <div className="flex space-x-4 lg:space-x-8">
+                    <div className="hidden md:flex items-center space-x-2 lg:space-x-3">
+                        {navLinks.map(link => (
                             <Link
-                                href="/resume"
-                                className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-[var(--muted)] text-[var(--foreground)] hover:text-[var(--primary)]"
+                                key={link.label}
+                                href={link.href}
+                                onClick={(e) => handleProjectsLinkClick(e, link.href)}
+                                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center space-x-1.5
+                                            hover:bg-[var(--muted)] hover:text-[var(--primary)]
+                                            ${pathname === link.href || (link.href.startsWith("/#") && pathname === "/") ? 'text-[var(--primary)] bg-[var(--muted)]' : 'text-[var(--foreground)]'}`}
                             >
-                                Resume
+                                {link.icon}
+                                <span>{link.label}</span>
                             </Link>
-                            <Link
-                                href="/projects"
-                                className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-[var(--muted)] text-[var(--foreground)] hover:text-[var(--primary)]"
-                            >
-                                Projects
-                            </Link>
-                            <Link
-                                href="/blog"
-                                className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-[var(--muted)] text-[var(--foreground)] hover:text-[var(--primary)]"
-                            >
-                                Blog
-                            </Link>
-                            <Link
-                                href="/research"
-                                className="px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-[var(--muted)] text-[var(--foreground)] hover:text-[var(--primary)]"
-                            >
-                                Research
-                            </Link>
-                        </div>
+                        ))}
                     </div>
 
-                    {/* Mobile menu button */}
-                    <div className="md:hidden flex-1">
-                        <button
-                            onClick={toggleMobileMenu}
-                            aria-label="Toggle mobile menu"
-                            className="p-2 rounded-md hover:bg-[var(--muted)] transition-colors"
-                        >
-                            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                        </button>
-                    </div>
-
-                    {/* Theme toggle button */}
-                    <div className="flex items-center justify-end flex-1 md:flex-initial">
+                    {/* Mobile menu button & Theme Toggle (Grouped) */}
+                    <div className="flex items-center">
                         <button
                             onClick={toggleTheme}
                             aria-label="Toggle theme"
-                            className="p-2 rounded-full border border-[var(--border)] bg-[var(--bg)] hover:bg-[var(--muted)] transition-colors"
+                            className="p-2 rounded-full hover:bg-[var(--muted)] transition-colors mr-2 md:mr-0"
                         >
                             {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
                         </button>
+                        <div className="md:hidden">
+                            <button
+                                onClick={toggleMobileMenu}
+                                aria-label="Toggle mobile menu"
+                                className="p-2 rounded-md hover:bg-[var(--muted)] transition-colors"
+                            >
+                                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                            </button>
+                        </div>
                     </div>
                 </div>
 
                 {/* Mobile Navigation Menu */}
-                <div className={`md:hidden transition-all duration-300 ease-in-out ${
-                    isMobileMenuOpen
-                        ? 'max-h-64 opacity-100'
-                        : 'max-h-0 opacity-0 overflow-hidden'
-                }`}>
-                    <div className="px-2 pt-2 pb-3 space-y-1 border-t border-[var(--border)]">
-                        <Link
-                            href="/resume"
-                            className="block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 hover:bg-[var(--muted)] text-[var(--foreground)] hover:text-[var(--primary)]"
-                            onClick={() => setIsMobileMenuOpen(false)}
+                <AnimatePresence>
+                    {isMobileMenuOpen && (
+                        <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.3, ease: "easeInOut" }}
+                            className={`md:hidden overflow-hidden`}
                         >
-                            Resume
-                        </Link>
-                        <Link
-                            href="/projects"
-                            className="block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 hover:bg-[var(--muted)] text-[var(--foreground)] hover:text-[var(--primary)]"
-                            onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                            Projects
-                        </Link>
-                        <Link
-                            href="/blog"
-                            className="block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 hover:bg-[var(--muted)] text-[var(--foreground)] hover:text-[var(--primary)]"
-                            onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                            Blog
-                        </Link>
-                        <Link
-                            href="/research"
-                            className="block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 hover:bg-[var(--muted)] text-[var(--foreground)] hover:text-[var(--primary)]"
-                            onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                            Research
-                        </Link>
-                    </div>
-                </div>
+                            <div className="px-2 pt-2 pb-3 space-y-1 border-t border-[var(--border)] mt-1">
+                                {navLinks.map(link => (
+                                    <Link
+                                        key={`mobile-${link.label}`}
+                                        href={link.href}
+                                        onClick={(e) => handleProjectsLinkClick(e, link.href)}
+                                        className={`block px-3 py-2.5 rounded-md text-base font-medium transition-colors duration-200 flex items-center space-x-2
+                                                    hover:bg-[var(--muted)] hover:text-[var(--primary)]
+                                                    ${pathname === link.href || (link.href.startsWith("/#") && pathname === "/") ? 'text-[var(--primary)] bg-[var(--muted)]' : 'text-[var(--foreground)]'}`}
+                                    >
+                                        {link.icon}
+                                        <span>{link.label}</span>
+                                    </Link>
+                                ))}
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
         </nav>
     );

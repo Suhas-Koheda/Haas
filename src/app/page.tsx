@@ -1,13 +1,21 @@
 import Name from "@/components/Name";
-import {ContributionsPage} from "@/components/Contributions";
 import Skills from "@/components/Skills";
+import Education from "@/components/Education";
+import Projects from "@/components/Projects";
+import OpenSourceContributions from "@/components/OpenSourceContributions";
+import Experience from "@/components/Experience";
+import { ContributionsPage } from "@/components/Contributions"; // Wakatime stats
 
-export default function Home(){
+export default function Home() {
     return (
-        <div className={""}>
-            <Name/>
-            <ContributionsPage/>
-            <Skills/>
-        </div>
-    )
+        <main className="flex flex-col items-center bg-[var(--bg)]">
+            <Name />
+            <Education />
+            <Skills />
+            <Projects /> {/* This component has id="projects-section" internally */}
+            <OpenSourceContributions />
+            <Experience />
+            <ContributionsPage /> {/* Wakatime stats */}
+        </main>
+    );
 }
