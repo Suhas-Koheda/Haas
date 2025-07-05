@@ -26,8 +26,13 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "GO",
+    title: 'Why Does Your Go Server Log /favicon.ico Requests? (And How to Fix It)',
+    date: 'July 5, 2025',
+  },
+  {
     slug: 'Writing and Publishing Gradle Plugins',
     title: 'Writing and Publishing Gradle Plugins',
     date: 'July 5, 2025',
-  }
+  },
 ];
