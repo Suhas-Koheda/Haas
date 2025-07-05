@@ -1,26 +1,35 @@
 "use client";
-import { useEffect, useState } from 'react';
-import { Eye, Download, FileType } from 'lucide-react';
+import { useEffect, useState, Suspense } from 'react';
+import { Eye, Download } from 'lucide-react';
+import { useSearchParams } from 'next/navigation';
 
 type ResumeType = "kotlin" | "frontend" | "ai";
 
-export default function ResumePage() {
+function ResumeContent() {
+    const searchParams = useSearchParams();
     const [isMounted, setIsMounted] = useState(false);
     const [selectedResume, setSelectedResume] = useState<ResumeType>("kotlin");
     
-    // Define resume paths based on type
     const resumePaths = {
         kotlin: "/resume/Suhas_Koheda_Resume_Kotlin.pdf",
         frontend: "/resume/Suhas_Koheda_Resume_frontend.pdf",
         ai: "/resume/Suhas_Koheda_Resume_AI.pdf"
     };
     
-    const currentResumePath = resumePaths[selectedResume];
-    const resumeFileName = `Suhas_Koheda_Resume_${selectedResume}.pdf`;
-
     useEffect(() => {
         setIsMounted(true);
-    }, []);
+        
+        // Get the lang parameter from URL
+        const langParam = searchParams.get('lang')?.toLowerCase();
+        
+        // Check if it's a valid resume type
+        if (langParam && ['kotlin', 'frontend', 'ai'].includes(langParam)) {
+            setSelectedResume(langParam as ResumeType);
+        }
+    }, [searchParams]);
+    
+    const currentResumePath = resumePaths[selectedResume];
+    const resumeFileName = `Suhas_Koheda_Resume_${selectedResume}.pdf`;
 
     if (!isMounted) {
         return (
@@ -98,5 +107,20 @@ export default function ResumePage() {
                 </p>
             </div>
         </div>
+    );
+}
+
+export default function ResumePage() {
+    return (
+        <Suspense fallback={
+            <div className="flex justify-center items-center min-h-screen bg-[var(--bg)] p-4">
+                <div className="text-center">
+                    <h1 className="text-2xl font-semibold text-[var(--foreground)] mb-4">Loading Resume Viewer</h1>
+                    <p className="text-[var(--muted-foreground)]">Please wait a moment...</p>
+                </div>
+            </div>
+        }>
+            <ResumeContent />
+        </Suspense>
     );
 }

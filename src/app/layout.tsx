@@ -35,7 +35,7 @@ export default function RootLayout({
             <body
                 className={`${jetbrainsMono.variable} ${inter.variable} font-mono antialiased bg-[var(--bg)] text-[var(--foreground)]`} // Added inter.variable and default font-mono
             >
-                <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange> {/* Standard ThemeProvider setup */}
+                <ThemeProvider > 
                     <div className={"h-[5px]"} style={{ background: "var(--primary)" }} /> {/* Use primary color for accent bar */}
                     <div className="px-4 md:px-8 lg:px-16 xl:px-28"> {/* Adjusted padding for better responsiveness */}
                         <Navigation />
