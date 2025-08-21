@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     productionBrowserSourceMaps:false,
     experimental:{
         serverSourceMaps:false,
-    }
+    },
 };
 
 export default nextConfig;

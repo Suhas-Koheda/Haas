@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build": "next build",
+    "deploy": "npx @cloudflare/next-on-pages"
   },
   "dependencies": {
     "@radix-ui/react-separator": "^1.1.7",

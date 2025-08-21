@@ -1,0 +1,5 @@
+name = "haas"
+compatibility_date = "2025-08-21"
+
+[build]
+command = "npm run build"
