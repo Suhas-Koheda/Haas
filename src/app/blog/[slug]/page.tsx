@@ -1,8 +1,9 @@
 "use client";
 
 import BlogPostContent from '@/components/BlogPostContent';
-import { useParams } from 'next/navigation';
 
+import { useParams } from 'next/navigation';
+export const runtime = 'edge';
 export default function BlogPostPage() {
   const { slug } = useParams();
   
