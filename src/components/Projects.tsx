@@ -30,6 +30,21 @@ const projectsData: Project[] = [
     ]
   },
   {
+    id: 'indian-legal-analytics',
+    name: 'Indian Legal Analytics 🔒',
+    description: 'A comprehensive dashboard for analyzing Supreme Court legal cases with advanced analytics and AI-powered insights. Features include Judge Analytics, Case Explorer, and a secure AI-powered Legal Assistant.',
+    technologies: ['Python', 'Streamlit', 'Pandas', 'Matplotlib', 'LangChain', 'Google Gemini API', 'Docker'],
+    githubLink: 'https://github.com/Suhas-Koheda/Indian-Legal-Analytics',
+    primaryLanguage: 'Python',
+    details: [
+      "Built a comprehensive dashboard for Supreme Court legal cases analysis (1950-2025).",
+      "Integrated LangChain and Google Gemini AI for advanced legal analysis and chatbot features.",
+      "Implemented secure API key handling using browser session storage, ensuring sensitive credentials never leave the client.",
+      "Developed automated preprocessing pipelines for large-scale legal metadata.",
+      "Containerized the application using Docker for easy deployment and scalability."
+    ]
+  },
+  {
     id: 'moviebuff',
     name: 'MovieBuff',
     description: 'Cross-platform movie browsing application with responsive UI supporting search, filtering, and detailed views. Implemented MVVM architecture with Coroutines and Flow.',
