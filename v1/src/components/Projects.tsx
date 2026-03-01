@@ -17,21 +17,23 @@ interface Project {
 
 const projectsData: Project[] = [
   {
-    id: 'resume-matcher',
-    name: 'Resume Matcher',
-    description: 'AI-powered resume analysis backend that evaluates resume-job description compatibility. Implemented PDF processing, AI integration with Gemini API, and RESTful endpoints.',
-    technologies: ['Kotlin', 'Spring Boot', 'PostgreSQL', 'Multer', 'Langchain4j', 'Gemini API'],
-    githubLink: 'https://github.com/Suhas-Koheda/RM',
-    primaryLanguage: 'Kotlin',
+    id: 'resumeforge',
+    name: 'ResumeForge',
+    description: 'A professional LaTeX resume generator with an AI-powered node-based visual editor. Features live PDF preview, AI text polishing using Gemini, and a drag-and-drop canvas.',
+    technologies: ['React', 'TypeScript', 'Vite', 'Express.js', 'PostgreSQL', 'Zustand', 'Gemini AI', 'Tectonic'],
+    githubLink: 'https://github.com/Suhas-Koheda/resumeforge',
+    liveLink: 'https://suhask.dev/resumebuilder/',
+    primaryLanguage: 'TypeScript',
     details: [
-      "Designed REST API endpoints for file uploads and analysis requests.",
-      "Implemented AI integration for text analysis and match scoring.",
-      "Built with Kotlin and Spring Boot for robust backend performance."
+      "Developed a node-based visual resume builder with drag-and-drop support.",
+      "Integrated Google Gemini AI for automated bullet point polishing and experience metrics.",
+      "Implemented a real-time LaTeX compilation engine using Tectonic for serverless PDF generation.",
+      "Engineered local network synchronization for real-time cross-device editing and preview."
     ]
   },
   {
     id: 'indian-legal-analytics',
-    name: 'Indian Legal Analytics 🔒',
+    name: 'Indian Legal Analytics ',
     description: 'A comprehensive dashboard for analyzing Supreme Court legal cases with advanced analytics and AI-powered insights. Features include Judge Analytics, Case Explorer, and a secure AI-powered Legal Assistant.',
     technologies: ['Python', 'Streamlit', 'Pandas', 'Matplotlib', 'LangChain', 'Google Gemini API', 'Docker'],
     githubLink: 'https://github.com/Suhas-Koheda/Indian-Legal-Analytics',
