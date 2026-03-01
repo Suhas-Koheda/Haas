@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowUpRight, X } from "lucide-react";
+import { ArrowUpRight, X, Github } from "lucide-react";
 import { projectsData, languageFilters } from "@/lib/projectsData";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -69,38 +69,49 @@ export default function AllProjects() {
                     className="flex flex-col bg-card border border-border rounded-xl p-6 hover:shadow-lg transition-shadow h-full"
                   >
                     <div className="flex items-start justify-between mb-4">
-                      {project.githubLink ? (
-                         <Link href={project.githubLink} target="_blank" className="flex items-center gap-2 hover:underline decoration-1 underline-offset-4 group">
-                          <h3 className="text-lg font-semibold truncate max-w-[200px]" title={project.name}>
-                            {project.name}
-                          </h3>
-                          <ArrowUpRight size={16} className="text-muted-foreground opacity-50 group-hover:opacity-100 transition-opacity" />
-                        </Link>
-                      ) : (
-                        <h3 className="text-lg font-semibold truncate" title={project.name}>
-                          {project.name}
-                        </h3>
-                      )}
+                      <h3 className="text-lg font-semibold truncate max-w-[200px]" title={project.name}>
+                        {project.name}
+                      </h3>
                     </div>
                     
                     <p className="text-sm text-muted-foreground leading-relaxed mb-6 line-clamp-3">
                       {project.description}
                     </p>
 
-                    <div className="mt-auto pt-4 border-t border-border/50">
-                      <div className="flex flex-wrap gap-2">
-                        {project.technologies?.slice(0, 4).map((tech) => (
-                          <span 
-                            key={tech} 
-                            className="px-2 py-0.5 text-[10px] font-mono border border-border rounded-full text-muted-foreground bg-muted/30"
+                    <div className="mt-auto space-y-4">
+                      <div className="pt-4 border-t border-border/50">
+                        <div className="flex flex-wrap gap-2">
+                          {project.technologies?.slice(0, 4).map((tech) => (
+                            <span 
+                              key={tech} 
+                              className="px-2 py-0.5 text-[10px] font-mono border border-border rounded-full text-muted-foreground bg-muted/30"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <div className="flex gap-2">
+                        {project.githubLink && (
+                          <Link 
+                            href={project.githubLink} 
+                            target="_blank" 
+                            className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-[10px] font-bold uppercase tracking-wider rounded-lg border border-border hover:bg-muted transition-colors"
                           >
-                            {tech}
-                          </span>
-                        ))}
-                        {project.technologies?.length > 4 && (
-                          <span className="px-2 py-0.5 text-[10px] font-mono text-muted-foreground">
-                            +{project.technologies.length - 4}
-                          </span>
+                            <Github size={12} />
+                            Code
+                          </Link>
+                        )}
+                        {project.liveLink && (
+                          <Link 
+                            href={project.liveLink} 
+                            target="_blank" 
+                            className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-[10px] font-bold uppercase tracking-wider rounded-lg bg-foreground text-background hover:bg-foreground/90 transition-colors"
+                          >
+                            <ArrowUpRight size={12} />
+                            Live
+                          </Link>
                         )}
                       </div>
                     </div>

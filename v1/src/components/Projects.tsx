@@ -266,28 +266,28 @@ const Projects = () => {
                   </div>
                 </div>
 
-                <div className="px-5 sm:px-6 py-3 sm:py-4 bg-[var(--background-alt)] border-t border-[var(--border)]">
-                  <div className="flex items-center justify-start space-x-4">
+                <div className="px-5 sm:px-6 py-4 bg-[var(--background-alt)] border-t border-[var(--border)]">
+                  <div className="flex flex-wrap items-center gap-3">
                     <a
                       href={project.githubLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center text-sm text-[var(--muted-foreground)] hover:text-[var(--primary)] transition-colors"
+                      className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold rounded-lg bg-[var(--card)] border border-[var(--border)] text-[var(--foreground)] hover:bg-[var(--muted)] hover:border-[var(--foreground)]/30 transition-all duration-200 shadow-sm"
                       aria-label={`GitHub repository for ${project.name}`}
                     >
-                      <Github size={18} className="mr-1.5" />
-                      Source Code
+                      <Github size={18} />
+                      <span>Code</span>
                     </a>
                     {project.liveLink && (
                       <a
                         href={project.liveLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center text-sm text-[var(--muted-foreground)] hover:text-[var(--primary)] transition-colors"
+                        className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold rounded-lg bg-[var(--primary)] text-[var(--primary-foreground)] hover:opacity-90 transition-all duration-200 shadow-sm"
                         aria-label={`Live demo of ${project.name}`}
                       >
-                        <ExternalLink size={18} className="mr-1.5" />
-                        Live/Details
+                        <ExternalLink size={18} />
+                        <span>Live</span>
                       </a>
                     )}
                   </div>

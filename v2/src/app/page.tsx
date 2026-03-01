@@ -47,20 +47,11 @@ export default function Home() {
           
           <div className="grid md:grid-cols-2 gap-x-8 gap-y-12">
             {projects.map((project, i) => (
-              <div key={i} className="group space-y-4 flex flex-col h-full">
+              <div key={i} className="group space-y-4 flex flex-col h-full bg-card/50 p-6 rounded-2xl border border-border/50 hover:border-border transition-colors">
                 <div className="flex items-start justify-between">
-                  {project.link ? (
-                     <Link href={project.link} target="_blank" className="flex items-center gap-2 group-hover:underline decoration-1 underline-offset-4">
-                      <h3 className="text-xl font-semibold">
-                        {project.title}
-                      </h3>
-                      <ArrowUpRight size={18} className="text-muted-foreground opacity-50 group-hover:opacity-100 transition-opacity" />
-                    </Link>
-                  ) : (
-                    <h3 className="text-xl font-semibold cursor-default">
-                      {project.title}
-                    </h3>
-                  )}
+                  <h3 className="text-xl font-semibold">
+                    {project.title}
+                  </h3>
                 </div>
                 <p className="text-muted-foreground leading-relaxed text-sm grow">
                   {project.description}
@@ -74,6 +65,29 @@ export default function Home() {
                       {tag}
                     </span>
                   ))}
+                </div>
+                
+                <div className="flex gap-3 pt-6 border-t border-border/10">
+                  {project.githubLink && (
+                    <Link 
+                      href={project.githubLink} 
+                      target="_blank" 
+                      className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 text-xs font-semibold rounded-xl border border-border hover:bg-muted transition-colors"
+                    >
+                      <Github size={14} />
+                      Code
+                    </Link>
+                  )}
+                  {project.liveLink && (
+                    <Link 
+                      href={project.liveLink} 
+                      target="_blank" 
+                      className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 text-xs font-semibold rounded-xl bg-foreground text-background hover:bg-foreground/90 transition-colors shadow-lg shadow-foreground/5"
+                    >
+                      <ArrowUpRight size={14} />
+                      Live
+                    </Link>
+                  )}
                 </div>
               </div>
             ))}
@@ -236,39 +250,46 @@ export default function Home() {
 
 const projects = [
   {
+    title: "ResumeForge",
+    description: "A professional LaTeX resume generator with an AI-powered node-based visual editor. Features live PDF preview and AI text polishing.",
+    tags: ["React", "TypeScript", "Vite", "Gemini AI"],
+    githubLink: "https://github.com/Suhas-Koheda/resumeforge",
+    liveLink: "https://suhask.dev/resumebuilder/"
+  },
+  {
     title: "AI Video Knowledge Editor",
     description: "Specialized AI-powered video editing tool enriching content with contextual knowledge cards using Whisper, GLiNER, and semantic retrieval.",
     tags: ["Python", "FastAPI", "PySide6", "OpenAI Whisper"],
-    link: "https://github.com/Suhas-Koheda/suhas-koheda-video-editor" 
+    githubLink: "https://github.com/Suhas-Koheda/suhas-koheda-video-editor" 
   },
   {
     title: "Indian Legal Analytics",
     description: "Full-stack legal analytics platform analyzing 42,000+ Supreme Court cases with interactive dashboards and Gemini-powered legal assistant.",
     tags: ["Python", "Streamlit", "LangChain", "Analytics"],
-    link: "https://github.com/Suhas-Koheda/IndianLegalAnalytics"
+    githubLink: "https://github.com/Suhas-Koheda/IndianLegalAnalytics"
   },
   {
     title: "Automated Manager",
     description: "Automation system converting emails into calendar events. Processed 500+ daily emails with 95% accuracy.",
     tags: ["Python", "LangChain", "Google APIs"],
-    link: "https://github.com/Suhas-Koheda/suhas-koheda-automatedmanager"
+    githubLink: "https://github.com/Suhas-Koheda/suhas-koheda-automatedmanager"
   },
   {
     title: "MovieBuff",
     description: "Cross-platform movie browsing application supporting Android, iOS, and Desktop using Kotlin Multiplatform with shared business logic.",
     tags: ["Kotlin Multiplatform", "Compose", "Ktor"],
-    link: "https://github.com/Suhas-Koheda/MBuff"
+    githubLink: "https://github.com/Suhas-Koheda/MBuff"
   },
   {
     title: "BloggerAI",
     description: "Research assistant generating formatted technical news summaries using Google Search API and AI processing.",
     tags: ["Python", "Flask", "LangChain", "Agent"],
-    link: "https://github.com/Suhas-Koheda/suhas-koheda-bloggerai"
+    githubLink: "https://github.com/Suhas-Koheda/suhas-koheda-bloggerai"
   },
   {
     title: "YouTube Content Manager",
     description: "AI-powered assistant generating engaging, SEO-optimized video titles and descriptions using GitHub's AI models via a clean React interface.",
     tags: ["React", "FastAPI", "Gemini AI", "Tailwind"],
-    link: "https://github.com/Suhas-Koheda/YoutubeGenerator"
+    githubLink: "https://github.com/Suhas-Koheda/YoutubeGenerator"
   }
 ];
