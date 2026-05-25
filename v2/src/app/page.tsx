@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight, Github, Linkedin, Mail, FileText, Trophy, GitFork } from "lucide-react";
 import AllProjects from "@/components/AllProjects";
 
@@ -11,14 +12,14 @@ export default function Home() {
           <div className="space-y-8 flex-1">
             <div className="space-y-4">
               <p className="font-mono text-sm text-muted-foreground uppercase tracking-widest">
-                Software Engineer
+                AI Researcher & Engineer
               </p>
               <h1 className="text-6xl md:text-7xl font-bold tracking-tighter">
                 Suhas Koheda
               </h1>
             </div>
             <p className="text-xl font-light text-muted-foreground max-w-xl leading-relaxed">
-              Building intelligent systems and robust backends. Passionate about AI/ML, distributed systems, and open source.
+              Building intelligent systems, robust backends, and AI-native automation. Passionate about attention architectures, self-supervised learning, and open source.
             </p>
             <div className="flex gap-4">
                <a 
@@ -35,6 +36,15 @@ export default function Home() {
                  Resume
                </Link>
             </div>
+          </div>
+          <div className="relative w-44 h-44 md:w-56 md:h-56 shrink-0 rounded-2xl overflow-hidden border border-border/80 bg-muted/40 shadow-md">
+            <Image
+              src="/images/suhas.png"
+              alt="Suhas Koheda"
+              fill
+              priority
+              className="object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-out"
+            />
           </div>
         </section>
 
@@ -199,11 +209,114 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Mindset & Evolution Section */}
+        <section className="space-y-12">
+          <div className="flex items-baseline justify-between border-b border-border pb-4">
+            <h2 className="text-2xl font-medium tracking-tight">Technical Evolution</h2>
+            <span className="text-sm text-muted-foreground font-mono">05</span>
+          </div>
+
+          <div className="space-y-12">
+            {/* The Shift Narrative */}
+            <div className="grid md:grid-cols-[1fr_2fr] gap-8">
+              <div className="text-sm text-muted-foreground font-mono pt-1">
+                The Shift
+              </div>
+              <div className="space-y-6 text-lg leading-relaxed text-foreground/90">
+                <p>
+                  Over the past year, my focus has shifted from building standalone applications to designing architecture-heavy, original systems. I’ve transitioned from a &quot;student doing projects&quot; to an engineer building intelligent infrastructure, tools, and models.
+                </p>
+                <p className="text-base text-muted-foreground">
+                  My work focuses on low-friction user experiences, AI-native workflows, and infrastructure abstractions that eliminate unnecessary setup and config overhead.
+                </p>
+              </div>
+            </div>
+
+            {/* Earlier vs Now Grid */}
+            <div className="grid md:grid-cols-[1fr_2fr] gap-8">
+              <div className="text-sm text-muted-foreground font-mono pt-1">
+                Progression
+              </div>
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* Earlier Phase */}
+                <div className="border border-border/60 rounded-xl p-6 bg-muted/10 space-y-4">
+                  <div className="text-xs uppercase font-mono tracking-widest text-muted-foreground border-b border-border/30 pb-2">
+                    Earlier Phase
+                  </div>
+                  <ul className="space-y-3 text-sm text-muted-foreground">
+                    <li className="flex gap-2 items-start">
+                      <span className="text-foreground/30 font-mono select-none">→</span>
+                      <span>&quot;How do I implement this?&quot;</span>
+                    </li>
+                    <li className="flex gap-2 items-start">
+                      <span className="text-foreground/30 font-mono select-none">→</span>
+                      <span>&quot;Why is this bug happening?&quot;</span>
+                    </li>
+                    <li className="flex gap-2 items-start">
+                      <span className="text-foreground/30 font-mono select-none">→</span>
+                      <span>&quot;How do I deploy this?&quot;</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Current Focus */}
+                <div className="border border-foreground/20 rounded-xl p-6 bg-muted/30 space-y-4 shadow-sm">
+                  <div className="text-xs uppercase font-mono tracking-widest text-foreground border-b border-border/30 pb-2 flex justify-between items-center">
+                    <span>Now</span>
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  </div>
+                  <ul className="space-y-3 text-sm text-foreground/90">
+                    <li className="flex gap-2 items-start">
+                      <span className="text-emerald-500 font-mono select-none">✓</span>
+                      <span>&quot;Why does this architecture exist and where are its limits?&quot;</span>
+                    </li>
+                    <li className="flex gap-2 items-start">
+                      <span className="text-emerald-500 font-mono select-none">✓</span>
+                      <span>&quot;What are SOTA systems struggling with?&quot;</span>
+                    </li>
+                    <li className="flex gap-2 items-start">
+                      <span className="text-emerald-500 font-mono select-none">✓</span>
+                      <span>&quot;How do we optimize latent representations and reduce memory footprint?&quot;</span>
+                    </li>
+                    <li className="flex gap-2 items-start">
+                      <span className="text-emerald-500 font-mono select-none">✓</span>
+                      <span>&quot;Can this system be trained self-supervised?&quot;</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Core Capabilities */}
+            <div className="grid md:grid-cols-[1fr_2fr] gap-8">
+              <div className="text-sm text-muted-foreground font-mono pt-1">
+                Core Stack & Areas
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                {[
+                  { title: "Systems & AI", desc: "Attention architectures, MLA, latent space design, self-supervised systems" },
+                  { title: "Infra & Event Systems", desc: "MongoDB change streams, custom authentication, async backends" },
+                  { title: "Open Source Ecosystem", desc: "Official Spring Boot starter for Gemini integration in LangChain4j" },
+                  { title: "Orchestration & Tools", desc: "Terminal-aware Local Agent Managers, automated tmux & API routers" },
+                  { title: "Cross-Platform Mobile", desc: "Kotlin Multiplatform (KMP), Compose, Ktor for shared core logic" },
+                  { title: "Backend Technologies", desc: "FastAPI background workers, Spring Boot, PostgreSQL & NoSQL" }
+                ].map((item, i) => (
+                  <div key={i} className="border border-border/50 p-4 rounded-xl space-y-1 bg-card/30 hover:border-foreground/20 transition-all duration-300">
+                    <h3 className="font-semibold text-xs text-foreground font-mono">{item.title}</h3>
+                    <p className="text-[11px] text-muted-foreground leading-normal">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </section>
+
         {/* Contact Section */}
         <section className="space-y-12">
           <div className="flex items-baseline justify-between border-b border-border pb-4">
             <h2 className="text-2xl font-medium tracking-tight">Let&apos;s Connect</h2>
-            <span className="text-sm text-muted-foreground font-mono">05</span>
+            <span className="text-sm text-muted-foreground font-mono">06</span>
           </div>
           
           <div className="grid md:grid-cols-2 gap-12">

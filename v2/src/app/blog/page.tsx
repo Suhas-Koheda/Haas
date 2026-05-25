@@ -13,7 +13,7 @@ export default function BlogIndex() {
           <ArrowLeft size={16} className="mr-2 group-hover:-translate-x-1 transition-transform" />
           Back
         </Link>
-
+ 
         <section className="space-y-4">
           <p className="font-mono text-sm text-muted-foreground uppercase tracking-widest">
             Writing

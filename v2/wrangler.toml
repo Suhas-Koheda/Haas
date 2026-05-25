@@ -1,0 +1,7 @@
+#:schema node_modules/wrangler/config-schema.json
+name = "haas-v2"
+compatibility_date = "2026-05-03"
+
+[assets]
+directory = "./out"
+not_found_handling = "404-page"

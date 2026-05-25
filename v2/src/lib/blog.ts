@@ -6,9 +6,17 @@ export interface BlogPost {
   title: string;
   date: string;
   description?: string;
+  isIpynb?: boolean;
 }
 
 export const blogPosts: BlogPost[] = [
+  {
+    slug: "attention-mechanism-kv-cache",
+    title: 'Deep Dive: Attention Mechanism & KV Cache',
+    date: 'May 25, 2026',
+    description: 'A detailed interactive notebook explaining Multi-Query Attention and KV cache indexing from scratch.',
+    isIpynb: true,
+  },
   {
     slug: "GO",
     title: 'Why Does Your Go Server Log /favicon.ico Requests?',
@@ -23,16 +31,21 @@ export const blogPosts: BlogPost[] = [
   },
 ];
 
-export async function getBlogPostContent(slug: string): Promise<string> {
+export async function getBlogPostContent(slug: string): Promise<{ content: string; isIpynb: boolean }> {
   // Decode the slug to handle spaces and special characters
   const decodedSlug = decodeURIComponent(slug);
-  const filePath = path.join(process.cwd(), 'public', 'blog', `${decodedSlug}.md`);
+  const ipynbPath = path.join(process.cwd(), 'public', 'blog', `${decodedSlug}.ipynb`);
+  const mdPath = path.join(process.cwd(), 'public', 'blog', `${decodedSlug}.md`);
+  
   try {
-    const fileContent = await fs.promises.readFile(filePath, 'utf8');
-    return fileContent;
+    if (fs.existsSync(ipynbPath)) {
+      const fileContent = await fs.promises.readFile(ipynbPath, 'utf8');
+      return { content: fileContent, isIpynb: true };
+    }
+    const fileContent = await fs.promises.readFile(mdPath, 'utf8');
+    return { content: fileContent, isIpynb: false };
   } catch (error) {
     console.error(`Error reading blog post ${decodedSlug}:`, error);
-    // Fallback? Or throw
     throw new Error(`Failed to load blog post: ${decodedSlug}`);
   }
 }

@@ -16,8 +16,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Suhas Koheda — Software Engineer",
-  description: "Portfolio of Suhas Koheda, a Software Engineer specializing in AI/ML and backend systems.",
+  title: "Suhas Koheda — AI Researcher & Engineer",
+  description: "Portfolio of Suhas Koheda, an AI Researcher & Engineer specializing in building intelligent systems, robust backends, and AI-native workflows.",
 };
 
 export default function RootLayout({

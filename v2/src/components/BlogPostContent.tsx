@@ -6,12 +6,14 @@ import rehypeHighlight from 'rehype-highlight';
 import 'highlight.js/styles/github-dark.css'; // Or 'github.css' based on theme
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import IpynbRenderer from '@/components/IpynbRenderer';
 
 interface BlogPostContentProps {
   content: string;
+  isIpynb?: boolean;
 }
 
-export default function BlogPostContent({ content }: BlogPostContentProps) {
+export default function BlogPostContent({ content, isIpynb }: BlogPostContentProps) {
   return (
     <div className="space-y-8">
       <Link 
@@ -22,7 +24,12 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
         Back to Blog
       </Link>
       
-      <div className="prose prose-lg dark:prose-invert prose-neutral max-w-none">
+      {isIpynb ? (
+        <div className="w-full">
+          <IpynbRenderer notebook={content} />
+        </div>
+      ) : (
+        <div className="prose prose-lg dark:prose-invert prose-neutral max-w-none">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeHighlight]}
@@ -58,6 +65,7 @@ export default function BlogPostContent({ content }: BlogPostContentProps) {
           {content}
         </ReactMarkdown>
       </div>
+    )}
     </div>
   );
 }

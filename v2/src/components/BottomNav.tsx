@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import {
   Home,
   FileText,
+  FileCode,
   Github,
   Linkedin,
   Mail,
@@ -24,6 +25,7 @@ function cn(...inputs: ClassValue[]) {
 const navItems = [
   { icon: Home, label: "Home", href: "/", shortcut: "h" },
   { icon: PenTool, label: "Blog", href: "/blog", shortcut: "b" },
+  { icon: FileCode, label: "IPYNB Viewer", href: "/ipynb", shortcut: "n" },
   { icon: FileText, label: "Resume", href: "/resume.pdf", external: true, shortcut: "r" },
   { icon: Github, label: "GitHub", href: "https://github.com/suhas-koheda", external: true, shortcut: "g" },
   {
