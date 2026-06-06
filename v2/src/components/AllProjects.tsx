@@ -110,7 +110,7 @@ export default function AllProjects() {
                             className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-[10px] font-bold uppercase tracking-wider rounded-lg bg-foreground text-background hover:bg-foreground/90 transition-colors"
                           >
                             <ArrowUpRight size={12} />
-                            Live
+                            {project.liveLinkText || "Live"}
                           </Link>
                         )}
                       </div>

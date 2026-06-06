@@ -95,7 +95,7 @@ export default function Home() {
                       className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 text-xs font-semibold rounded-xl bg-foreground text-background hover:bg-foreground/90 transition-colors shadow-lg shadow-foreground/5"
                     >
                       <ArrowUpRight size={14} />
-                      Live
+                      {project.liveLinkText || "Live"}
                     </Link>
                   )}
                 </div>
@@ -232,61 +232,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Earlier vs Now Grid */}
-            <div className="grid md:grid-cols-[1fr_2fr] gap-8">
-              <div className="text-sm text-muted-foreground font-mono pt-1">
-                Progression
-              </div>
-              <div className="grid md:grid-cols-2 gap-6">
-                {/* Earlier Phase */}
-                <div className="border border-border/60 rounded-xl p-6 bg-muted/10 space-y-4">
-                  <div className="text-xs uppercase font-mono tracking-widest text-muted-foreground border-b border-border/30 pb-2">
-                    Earlier Phase
-                  </div>
-                  <ul className="space-y-3 text-sm text-muted-foreground">
-                    <li className="flex gap-2 items-start">
-                      <span className="text-foreground/30 font-mono select-none">→</span>
-                      <span>&quot;How do I implement this?&quot;</span>
-                    </li>
-                    <li className="flex gap-2 items-start">
-                      <span className="text-foreground/30 font-mono select-none">→</span>
-                      <span>&quot;Why is this bug happening?&quot;</span>
-                    </li>
-                    <li className="flex gap-2 items-start">
-                      <span className="text-foreground/30 font-mono select-none">→</span>
-                      <span>&quot;How do I deploy this?&quot;</span>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Current Focus */}
-                <div className="border border-foreground/20 rounded-xl p-6 bg-muted/30 space-y-4 shadow-sm">
-                  <div className="text-xs uppercase font-mono tracking-widest text-foreground border-b border-border/30 pb-2 flex justify-between items-center">
-                    <span>Now</span>
-                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                  </div>
-                  <ul className="space-y-3 text-sm text-foreground/90">
-                    <li className="flex gap-2 items-start">
-                      <span className="text-emerald-500 font-mono select-none">✓</span>
-                      <span>&quot;Why does this architecture exist and where are its limits?&quot;</span>
-                    </li>
-                    <li className="flex gap-2 items-start">
-                      <span className="text-emerald-500 font-mono select-none">✓</span>
-                      <span>&quot;What are SOTA systems struggling with?&quot;</span>
-                    </li>
-                    <li className="flex gap-2 items-start">
-                      <span className="text-emerald-500 font-mono select-none">✓</span>
-                      <span>&quot;How do we optimize latent representations and reduce memory footprint?&quot;</span>
-                    </li>
-                    <li className="flex gap-2 items-start">
-                      <span className="text-emerald-500 font-mono select-none">✓</span>
-                      <span>&quot;Can this system be trained self-supervised?&quot;</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
             {/* Core Capabilities */}
             <div className="grid md:grid-cols-[1fr_2fr] gap-8">
               <div className="text-sm text-muted-foreground font-mono pt-1">
@@ -363,46 +308,48 @@ export default function Home() {
 
 const projects = [
   {
+    title: "Telugu Speech Pipeline",
+    description: "An automated speech ingestion and processing pipeline curating high-quality datasets using voice activity detection (VAD), speaker diarization, and ASR.",
+    tags: ["Python", "PyTorch", "PyAnote", "IndicConformer"],
+    githubLink: "https://github.com/Suhas-Koheda/speech-pipeline"
+  },
+  {
+    title: "Telugu to Hindi S2S Dataset Notebook",
+    description: "A parallel Speech-to-Speech (S2S) dataset builder utilizing Kaggle T4 GPUs to stream, translate, and synthesize multilingual audio datasets.",
+    tags: ["Python", "PyTorch", "IndicTrans2", "MMS-TTS"],
+    githubLink: "https://github.com/Suhas-Koheda/deeplearning",
+    liveLink: "/blog/parallel-dataset",
+    liveLinkText: "Notebook"
+  },
+  {
     title: "ResumeForge",
     description: "A professional LaTeX resume generator with an AI-powered node-based visual editor. Features live PDF preview and AI text polishing.",
     tags: ["React", "TypeScript", "Vite", "Gemini AI"],
-    githubLink: "https://github.com/Suhas-Koheda/resumeforge",
-    liveLink: "https://suhask.dev/resumebuilder/"
+    githubLink: "https://github.com/Suhas-Koheda/resumeforge"
   },
   {
     title: "AI Video Knowledge Editor",
-    description: "Specialized AI-powered video editing tool enriching content with contextual knowledge cards using Whisper, GLiNER, and semantic retrieval.",
-    tags: ["Python", "FastAPI", "PySide6", "OpenAI Whisper"],
-    githubLink: "https://github.com/Suhas-Koheda/suhas-koheda-video-editor" 
+    description: "An AI-powered video editor that automatically enriches standard video content with contextual Knowledge Cards using Whisper, GLiNER, and semantic web retrieval.",
+    tags: ["Python", "FastAPI", "PySide6", "Playwright"],
+    githubLink: "https://github.com/Suhas-Koheda/video-editor"
+  },
+  {
+    title: "Java Code Optimizer",
+    description: "A web-based code refactoring application powered by a Salesforce CodeT5-small model fine-tuned on Java optimization datasets.",
+    tags: ["Java", "CodeT5", "Flask", "Hugging Face"],
+    githubLink: "https://github.com/Suhas-Koheda/deeplearning"
   },
   {
     title: "Indian Legal Analytics",
     description: "Full-stack legal analytics platform analyzing 42,000+ Supreme Court cases with interactive dashboards and Gemini-powered legal assistant.",
     tags: ["Python", "Streamlit", "LangChain", "Analytics"],
-    githubLink: "https://github.com/Suhas-Koheda/IndianLegalAnalytics"
-  },
-  {
-    title: "Automated Manager",
-    description: "Automation system converting emails into calendar events. Processed 500+ daily emails with 95% accuracy.",
-    tags: ["Python", "LangChain", "Google APIs"],
-    githubLink: "https://github.com/Suhas-Koheda/suhas-koheda-automatedmanager"
+    githubLink: "https://github.com/Suhas-Koheda/Indian-Legal-Analytics"
   },
   {
     title: "MovieBuff",
     description: "Cross-platform movie browsing application supporting Android, iOS, and Desktop using Kotlin Multiplatform with shared business logic.",
     tags: ["Kotlin Multiplatform", "Compose", "Ktor"],
     githubLink: "https://github.com/Suhas-Koheda/MBuff"
-  },
-  {
-    title: "BloggerAI",
-    description: "Research assistant generating formatted technical news summaries using Google Search API and AI processing.",
-    tags: ["Python", "Flask", "LangChain", "Agent"],
-    githubLink: "https://github.com/Suhas-Koheda/suhas-koheda-bloggerai"
-  },
-  {
-    title: "YouTube Content Manager",
-    description: "AI-powered assistant generating engaging, SEO-optimized video titles and descriptions using GitHub's AI models via a clean React interface.",
-    tags: ["React", "FastAPI", "Gemini AI", "Tailwind"],
-    githubLink: "https://github.com/Suhas-Koheda/YoutubeGenerator"
   }
 ];
+

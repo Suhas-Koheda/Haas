@@ -11,6 +11,13 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "parallel-dataset",
+    title: 'Telugu to Hindi S2S Dataset Builder',
+    date: 'Jun 6, 2026',
+    description: 'A Jupyter notebook demonstrating the creation of a Telugu to Hindi parallel Speech-to-Speech (S2S) dataset.',
+    isIpynb: true,
+  },
+  {
     slug: "attention-mechanism-kv-cache",
     title: 'Deep Dive: Attention Mechanism & KV Cache',
     date: 'May 25, 2026',

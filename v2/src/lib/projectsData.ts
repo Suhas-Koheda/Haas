@@ -6,18 +6,76 @@ export interface Project {
   technologies: string[];
   githubLink: string;
   liveLink?: string;
+  liveLinkText?: string;
   primaryLanguage: 'Kotlin' | 'Java' | 'JavaScript' | 'Python' | 'HTML' | 'TypeScript' | 'Web3' | 'Other';
   details?: string[];
 }
 
 export const projectsData: Project[] = [
   {
+    id: 'speech-pipeline',
+    name: 'Telugu Speech Pipeline',
+    description: 'An automated, modular, and scalable pipeline for curating high-quality Telugu speech datasets from YouTube channels. Handles voice activity detection (VAD), speaker diarization, speaker attribution, and multilingual ASR transcription.',
+    technologies: ['Python', 'PyAnote', 'Silero VAD', 'IndicConformer', 'yt-dlp', 'FFmpeg', 'PyTorch'],
+    githubLink: 'https://github.com/Suhas-Koheda/speech-pipeline',
+    primaryLanguage: 'Python',
+    details: [
+      "Designed an end-to-end pipeline to crawl YouTube video links, extract metadata, and download/resample audio to 16kHz mono WAV.",
+      "Employed Silero VAD to detect speech segments, merging adjacent segments with gaps <= 0.5s and splitting long durations to optimize ASR training formats.",
+      "Integrated PyAnote Speaker Diarization 3.1 to identify unique speaker turns and assign dominant speakers to segments using temporal overlap logic.",
+      "Transcribed segmented audio chunks using AI4Bharat's IndicConformer (600M multilingual model) with RNN-T decoding."
+    ]
+  },
+  {
+    id: 's2s-dataset-builder',
+    name: 'Telugu to Hindi S2S Dataset Notebook',
+    description: 'An automated parallel Speech-to-Speech (S2S) dataset pipeline running on Kaggle T4 GPUs to stream, translate, and synthesize multilingual audio datasets.',
+    technologies: ['Python', 'PyTorch', 'IndicTrans2', 'MMS-TTS', 'Hugging Face Hub'],
+    githubLink: 'https://github.com/Suhas-Koheda/deeplearning',
+    liveLink: '/blog/parallel-dataset',
+    liveLinkText: 'Notebook',
+    primaryLanguage: 'Python',
+    details: [
+      "Built a pipeline to stream source audio files from Hugging Face's ai4bharat/indicvoices Telugu split in real-time.",
+      "Translated the source transcripts into Hindi utilizing the IndicTrans2 seq2seq model (dist-320M) on CUDA GPU.",
+      "Synthesized corresponding Hindi audio waveforms from the translated transcripts using Facebook's MMS-TTS model.",
+      "Casted and uploaded the processed audio and metadata chunks to the target nlpctx/telugu-hindi-s2s Hugging Face dataset repository."
+    ]
+  },
+  {
+    id: 'ai-video-editor',
+    name: 'AI Video Knowledge Editor',
+    description: 'An AI-powered video editor that automatically enriches standard video content with contextual Knowledge Cards by combining high-speed transcription, zero-shot entity recognition, and real-time semantic web retrieval.',
+    technologies: ['Python', 'FastAPI', 'PySide6', 'Playwright', 'FFmpeg', 'faster-whisper', 'GLiNER', 'PostHog'],
+    githubLink: 'https://github.com/Suhas-Koheda/video-editor',
+    primaryLanguage: 'Python',
+    details: [
+      "Integrated faster-whisper for speech-to-text and Sarvam AI / local NLLB-200 for high-fidelity translation of Indic languages.",
+      "Developed contextual entity ranking utilizing zero-shot GLiNER NER models combined with sliding window context and global frequency statistics.",
+      "Implemented agentic semantic search with SentenceTransformers to dynamically query Wikipedia and DuckDuckGo for contextually relevant summaries.",
+      "Built a desktop GUI (PySide6) and a headless FastAPI microservice supporting automated page screenshot capture via Playwright and overlay rendering via FFmpeg."
+    ]
+  },
+  {
+    id: 'java-code-optimizer',
+    name: 'Java Code Optimizer',
+    description: 'A web-based code refactoring application powered by a Salesforce CodeT5-small model fine-tuned on Java optimization datasets to transform inefficient code structures.',
+    technologies: ['Java', 'Python', 'Flask', 'Hugging Face Transformers', 'CodeT5', 'PyTorch'],
+    githubLink: 'https://github.com/Suhas-Koheda/deeplearning',
+    primaryLanguage: 'Java',
+    details: [
+      "Fine-tuned Salesforce CodeT5-small on 6K Java optimization pairs (nlpctx/java_optimisation) using Seq2SeqTrainer for Java code refactoring.",
+      "Built a web user interface with Flask allowing developers to submit Java snippets, select pre-loaded optimization examples, and view instant suggestions.",
+      "Implemented automatic backend fallback to CPU when CUDA/GPU acceleration is unavailable.",
+      "Added application health endpoints to monitor model loading state and host device resource utilization."
+    ]
+  },
+  {
     id: 'resumeforge',
     name: 'ResumeForge',
     description: 'A professional LaTeX resume generator with an AI-powered node-based visual editor. Features live PDF preview, AI text polishing using Gemini, and a drag-and-drop canvas.',
     technologies: ['React', 'TypeScript', 'Vite', 'Express.js', 'PostgreSQL', 'Zustand', 'Gemini AI', 'Tectonic'],
     githubLink: 'https://github.com/Suhas-Koheda/resumeforge',
-    liveLink: 'https://suhask.dev/resumebuilder/',
     primaryLanguage: 'TypeScript',
     details: [
       "Developed a node-based visual resume builder with drag-and-drop support.",
@@ -149,26 +207,18 @@ export const projectsData: Project[] = [
     ]
   },
   {
-    name: "AI Video Knowledge Editor",
-    description: "Specialized AI-powered video editing tool enriching content with contextual knowledge cards using Whisper, GLiNER, and semantic retrieval.",
-    technologies: ["Python", "FastAPI", "PySide6", "OpenAI Whisper"],
-    githubLink: "https://github.com/Suhas-Koheda/suhas-koheda-video-editor",
-    primaryLanguage: 'Python',
-    id: 'ai-video-editor'
-  },
-  {
     name: "YouTube Content Manager",
     description: "AI-powered assistant generating engaging, SEO-optimized video titles and descriptions using GitHub's AI models via a clean React interface.",
     technologies: ["React", "FastAPI", "Gemini AI", "Tailwind"],
     githubLink: "https://github.com/Suhas-Koheda/YoutubeGenerator",
-    primaryLanguage: 'TypeScript', 
+    primaryLanguage: 'TypeScript',
     id: 'youtube-manager'
   },
   {
     name: "BloggerAI",
     description: "Research assistant generating formatted technical news summaries using Google Search API and AI processing.",
     technologies: ["Python", "Flask", "LangChain", "Agent"],
-    githubLink: "https://github.com/Suhas-Koheda/suhas-koheda-bloggerai",
+    githubLink: "https://github.com/Suhas-Koheda/bloggerai",
     primaryLanguage: 'Python',
     id: 'blogger-ai'
   }

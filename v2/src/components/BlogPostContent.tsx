@@ -4,25 +4,38 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import 'highlight.js/styles/github-dark.css'; // Or 'github.css' based on theme
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, FileCode } from 'lucide-react';
 import Link from 'next/link';
 import IpynbRenderer from '@/components/IpynbRenderer';
 
 interface BlogPostContentProps {
   content: string;
   isIpynb?: boolean;
+  slug?: string;
 }
 
-export default function BlogPostContent({ content, isIpynb }: BlogPostContentProps) {
+export default function BlogPostContent({ content, isIpynb, slug }: BlogPostContentProps) {
   return (
     <div className="space-y-8">
-      <Link 
-        href="/blog" 
-        className="inline-flex items-center text-foreground hover:text-muted-foreground transition-colors group"
-      >
-        <ArrowLeft size={16} className="mr-2 group-hover:-translate-x-1 transition-transform" />
-        Back to Blog
-      </Link>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <Link 
+          href="/blog" 
+          className="inline-flex items-center text-foreground hover:text-muted-foreground transition-colors group"
+        >
+          <ArrowLeft size={16} className="mr-2 group-hover:-translate-x-1 transition-transform" />
+          Back to Blog
+        </Link>
+        {isIpynb && slug && (
+          <a
+            href={`/blog/${slug}.ipynb`}
+            download={`${slug}.ipynb`}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg border border-border hover:bg-muted transition-colors text-muted-foreground hover:text-foreground"
+          >
+            <FileCode size={14} />
+            Download Raw Notebook (.ipynb)
+          </a>
+        )}
+      </div>
       
       {isIpynb ? (
         <div className="w-full">
