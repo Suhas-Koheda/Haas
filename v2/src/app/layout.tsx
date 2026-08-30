@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "./providers";
 import { BottomNav } from "@/components/BottomNav";
+import TimeTracker from "@/components/TimeTracker";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -18,6 +19,9 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "Suhas Koheda — AI Researcher & Engineer",
   description: "Portfolio of Suhas Koheda, an AI Researcher & Engineer specializing in building intelligent systems, robust backends, and AI-native workflows.",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
@@ -32,10 +36,11 @@ export default function RootLayout({
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >
+          <TimeTracker />
           {children}
           <BottomNav />
         </ThemeProvider>

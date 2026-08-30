@@ -4,24 +4,21 @@
 
 @layer base {
   :root {
-    /* Light Mode */
-    --background: 0 0% 100%; /* white #ffffff */
-    --foreground: 240 14% 10%; /* #16161d */
+    --background: 0 0% 100%;
+    --foreground: 240 14% 10%;
     --muted: 0 0% 96%;
-    --muted-foreground: 240 5% 45%; 
+    --muted-foreground: 240 5% 45%;
     --border: 0 0% 92%;
     --input: 0 0% 92%;
     --accent: 0 0% 96%;
     --accent-foreground: 240 14% 10%;
-    
     --radius: 0.5rem;
   }
- 
+
   .dark {
-    /* Dark Mode (Inverted) */
-    --background: 240 14% 10%; /* #16161d */
-    --foreground: 0 0% 100%; /* white */
-    --muted: 240 10% 16%; /* slightly lighter than bg */
+    --background: 240 14% 10%;
+    --foreground: 0 0% 100%;
+    --muted: 240 10% 16%;
     --muted-foreground: 240 5% 65%;
     --border: 240 10% 20%;
     --input: 240 10% 20%;
@@ -29,7 +26,7 @@
     --accent-foreground: 0 0% 100%;
   }
 }
- 
+
 @layer base {
   * {
     @apply border-border;
@@ -37,4 +34,9 @@
   body {
     @apply bg-background text-foreground tracking-tight font-sans antialiased;
   }
+}
+
+::selection {
+  background: hsl(var(--foreground));
+  color: hsl(var(--background));
 }
