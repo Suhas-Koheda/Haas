@@ -11,63 +11,46 @@ interface HeatmapProps {
 }
 
 export default function Heatmap({ data, title, color = '34, 197, 94', link, dayData }: HeatmapProps) {
-  const { weeks, maxCount, hasAnyData } = useMemo(() => {
-    const today = new Date();
-    const dates: Date[] = [];
-    for (let i = 364; i >= 0; i--) {
-      const d = new Date(today);
-      d.setDate(d.getDate() - i);
-      dates.push(d);
+  const { weeks, monthLabels, maxCount, hasAnyData } = useMemo(() => {
+    const dataDates = Object.keys(data).filter((k) => data[k] > 0);
+    const hasAnyData = dataDates.length > 0;
+
+    if (!hasAnyData) {
+      return { weeks: [], monthLabels: [] as { label: string; position: number }[], maxCount: 1, hasAnyData: false };
     }
+
+    // Calculate date range from actual data
+    const sortedDates = dataDates.sort();
+    const earliestDate = new Date(sortedDates[0]);
+    const latestDate = new Date(sortedDates[sortedDates.length - 1]);
+
+    // Add padding: 1 week before and 1 week after
+    const startDate = new Date(earliestDate);
+    startDate.setDate(startDate.getDate() - 7);
+    startDate.setDate(startDate.getDate() - startDate.getDay());
+
+    const endDate = new Date(latestDate);
+    endDate.setDate(endDate.getDate() + 7);
+    endDate.setDate(endDate.getDate() + (6 - endDate.getDay()));
+
+    // Generate all dates in range
+    const dates: Date[] = [];
+    const current = new Date(startDate);
+    while (current <= endDate) {
+      dates.push(new Date(current));
+      current.setDate(current.getDate() + 1);
+    }
+
+    // Group into weeks
     const weeks: Date[][] = [];
     for (let i = 0; i < dates.length; i += 7) {
       weeks.push(dates.slice(i, i + 7));
     }
-    const maxCount = Math.max(...Object.values(data), 1);
-    const hasAnyData = Object.values(data).some((v) => v > 0);
-    return { weeks, maxCount, hasAnyData };
-  }, [data]);
 
-  // Filter weeks to only show those with data
-  const { filteredWeeks, monthLabels } = useMemo(() => {
-    if (!hasAnyData) return { filteredWeeks: weeks, monthLabels: [] as { label: string; position: number }[] };
-    
-    // Find the first and last week with data
-    let firstWeekIdx = 0;
-    let lastWeekIdx = weeks.length - 1;
-    
-    for (let i = 0; i < weeks.length; i++) {
-      const hasData = weeks[i].some((date) => {
-        const key = date.toISOString().split('T')[0];
-        return (data[key] || 0) > 0;
-      });
-      if (hasData) {
-        firstWeekIdx = i;
-        break;
-      }
-    }
-    
-    for (let i = weeks.length - 1; i >= 0; i--) {
-      const hasData = weeks[i].some((date) => {
-        const key = date.toISOString().split('T')[0];
-        return (data[key] || 0) > 0;
-      });
-      if (hasData) {
-        lastWeekIdx = i;
-        break;
-      }
-    }
-    
-    // Add some padding
-    firstWeekIdx = Math.max(0, firstWeekIdx - 1);
-    lastWeekIdx = Math.min(weeks.length - 1, lastWeekIdx + 1);
-    
-    const filteredWeeks = weeks.slice(firstWeekIdx, lastWeekIdx + 1);
-    
-    // Calculate month labels for ALL months in the range
+    // Calculate month labels
     const monthLabels: { label: string; position: number }[] = [];
     const seenMonths = new Set<string>();
-    filteredWeeks.forEach((week, i) => {
+    weeks.forEach((week, i) => {
       const month = week[0].getMonth();
       const year = week[0].getFullYear();
       const key = `${year}-${month}`;
@@ -76,9 +59,10 @@ export default function Heatmap({ data, title, color = '34, 197, 94', link, dayD
         monthLabels.push({ label: week[0].toLocaleString('default', { month: 'short' }), position: i });
       }
     });
-    
-    return { filteredWeeks, monthLabels };
-  }, [weeks, data, hasAnyData]);
+
+    const maxCount = Math.max(...Object.values(data), 1);
+    return { weeks, monthLabels, maxCount, hasAnyData };
+  }, [data]);
 
   const getColor = (count: number) => {
     if (count === 0) return 'hsl(var(--muted))';
@@ -146,7 +130,7 @@ export default function Heatmap({ data, title, color = '34, 197, 94', link, dayD
                 <span key={d} className="text-[10px] text-muted-foreground h-[10px] leading-[10px]">{d}</span>
               ))}
             </div>
-            {filteredWeeks.map((week, i) => (
+            {weeks.map((week, i) => (
               <div key={i} className="flex flex-col gap-[3px]">
                 {week.map((date, j) => {
                   const key = date.toISOString().split('T')[0];

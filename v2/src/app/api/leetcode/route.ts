@@ -4,7 +4,6 @@ const LEETCODE_USERNAME = 'U-Coder';
 
 export async function GET() {
   try {
-    // Scrape LeetCode profile page
     const res = await fetch(`https://leetcode.com/${LEETCODE_USERNAME}`, {
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
@@ -12,17 +11,14 @@ export async function GET() {
     });
     const html = await res.text();
 
-    // Extract submission data from the page
-    // LeetCode embeds submission data in a script tag
     const submissions: { title: string; timestamp: string; statusDisplay: string }[] = [];
 
-    // Look for the submission calendar data
+    // Extract submission calendar data from the page
     const calendarMatch = html.match(/submissionCalendar["\s:=]+({[^}]+})/);
     if (calendarMatch) {
       try {
         const calendarData = JSON.parse(calendarMatch[1].replace(/'/g, '"'));
-        Object.entries(calendarData).forEach(([timestamp, count]) => {
-          const date = new Date(parseInt(timestamp) * 1000).toISOString().split('T')[0];
+        Object.entries(calendarData).forEach(([timestamp]) => {
           submissions.push({
             title: 'Submission',
             timestamp,
@@ -34,13 +30,13 @@ export async function GET() {
 
     // Also look for recent submissions in the page
     const submissionMatches = html.matchAll(/titleSlug["\s:=]+["']([^"']+)["'][^}]*timestamp["\s:=]+["']([\d]+)["']/g);
-    for (const match of submissionMatches) {
+    Array.from(submissionMatches).forEach((match) => {
       submissions.push({
         title: match[1],
         timestamp: match[2],
         statusDisplay: 'Accepted',
       });
-    }
+    });
 
     return NextResponse.json({ submissions });
   } catch {
