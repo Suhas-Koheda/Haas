@@ -4,89 +4,108 @@ import { useState, useEffect } from 'react';
 import Heatmap from './Heatmap';
 
 type Tab = 'all' | 'github' | 'leetcode' | 'kaggle';
+type Platform = 'github' | 'leetcode' | 'kaggle';
 
-const GITHUB_USERNAME = 'suhas-koheda';
-const LEETCODE_USERNAME = 'ssk450';
-const KAGGLE_USERNAME = 'ssk450';
+const PLATFORMS: Record<Platform, { username: string; label: string; color: string; link: string }> = {
+  github: { username: 'suhas-koheda', label: 'GitHub', color: '34, 197, 94', link: 'https://github.com/suhas-koheda' },
+  leetcode: { username: 'U-Coder', label: 'LeetCode', color: '249, 115, 22', link: 'https://leetcode.com/U-Coder' },
+  kaggle: { username: 'suhaskoheda', label: 'Kaggle', color: '59, 130, 246', link: 'https://www.kaggle.com/suhaskoheda' },
+};
+
+type DayData = { github: number; leetcode: number; kaggle: number };
 
 export default function ActivityHeatmaps() {
   const [activeTab, setActiveTab] = useState<Tab>('all');
-  const [githubData, setGithubData] = useState<Record<string, number>>({});
-  const [leetcodeData, setLeetcodeData] = useState<Record<string, number>>({});
-  const [kaggleData, setKaggleData] = useState<Record<string, number>>({});
-  const [loading, setLoading] = useState({ github: true, leetcode: true, kaggle: true });
-  const [errors, setErrors] = useState({ github: false, leetcode: false, kaggle: false });
+  const [combinedData, setCombinedData] = useState<DayData>({ github: 0, leetcode: 0, kaggle: 0 });
+  const [data, setData] = useState<Record<string, DayData>>({});
+  const [loading, setLoading] = useState(true);
+  const [errors, setErrors] = useState<Record<Platform, boolean>>({ github: false, leetcode: false, kaggle: false });
 
   useEffect(() => {
-    // Fetch GitHub events
-    fetch(`https://api.github.com/users/${GITHUB_USERNAME}/events?per_page=100`)
-      .then((r) => r.json())
-      .then((events) => {
-        const data: Record<string, number> = {};
+    const fetchAll = async () => {
+      const newData: Record<string, DayData> = {};
+      const newErrors = { github: false, leetcode: false, kaggle: false };
+      let anySuccess = false;
+
+      // GitHub
+      try {
+        const res = await fetch(`https://api.github.com/users/${PLATFORMS.github.username}/events?per_page=100`);
+        const events = await res.json();
         events.forEach((e: { created_at: string }) => {
           const date = e.created_at.split('T')[0];
-          data[date] = (data[date] || 0) + 1;
+          if (!newData[date]) newData[date] = { github: 0, leetcode: 0, kaggle: 0 };
+          newData[date].github++;
         });
-        setGithubData(data);
-        setLoading((p) => ({ ...p, github: false }));
-      })
-      .catch(() => {
-        setErrors((p) => ({ ...p, github: true }));
-        setLoading((p) => ({ ...p, github: false }));
-      });
+        anySuccess = true;
+      } catch {
+        newErrors.github = true;
+      }
 
-    // Fetch LeetCode submissions
-    fetch('https://leetcode.com/graphql', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        query: `query recentSubmissions($username: String!) {
-          recentSubmissionList(username: $username, limit: 100) {
-            title
-            timestamp
-            statusDisplay
-          }
-        }`,
-        variables: { username: LEETCODE_USERNAME },
-      }),
-    })
-      .then((r) => r.json())
-      .then((res) => {
-        const submissions = res?.data?.recentSubmissionList || [];
-        const data: Record<string, number> = {};
+      // LeetCode
+      try {
+        const res = await fetch('https://leetcode.com/graphql', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            query: `query recentSubmissions($username: String!) {
+              recentSubmissionList(username: $username, limit: 100) {
+                title
+                timestamp
+                statusDisplay
+              }
+            }`,
+            variables: { username: PLATFORMS.leetcode.username },
+          }),
+        });
+        const json = await res.json();
+        const submissions = json?.data?.recentSubmissionList || [];
         submissions.forEach((s: { timestamp: string }) => {
           const date = new Date(parseInt(s.timestamp) * 1000).toISOString().split('T')[0];
-          data[date] = (data[date] || 0) + 1;
+          if (!newData[date]) newData[date] = { github: 0, leetcode: 0, kaggle: 0 };
+          newData[date].leetcode++;
         });
-        setLeetcodeData(data);
-        setLoading((p) => ({ ...p, leetcode: false }));
-      })
-      .catch(() => {
-        setErrors((p) => ({ ...p, leetcode: true }));
-        setLoading((p) => ({ ...p, leetcode: false }));
-      });
+        anySuccess = true;
+      } catch {
+        newErrors.leetcode = true;
+      }
 
-    // Fetch Kaggle activity
-    fetch(`https://www.kaggle.com/api/v1/users/${KAGGLE_USERNAME}/activity`)
-      .then((r) => r.json())
-      .then((data) => {
-        const counts: Record<string, number> = {};
-        if (Array.isArray(data)) {
-          data.forEach((item: { date?: string }) => {
+      // Kaggle
+      try {
+        const res = await fetch(`https://www.kaggle.com/api/v1/users/${PLATFORMS.kaggle.username}/activity`);
+        const items = await res.json();
+        if (Array.isArray(items)) {
+          items.forEach((item: { date?: string }) => {
             if (item.date) {
               const date = item.date.split('T')[0];
-              counts[date] = (counts[date] || 0) + 1;
+              if (!newData[date]) newData[date] = { github: 0, leetcode: 0, kaggle: 0 };
+              newData[date].kaggle++;
             }
           });
         }
-        setKaggleData(counts);
-        setLoading((p) => ({ ...p, kaggle: false }));
-      })
-      .catch(() => {
-        setErrors((p) => ({ ...p, kaggle: true }));
-        setLoading((p) => ({ ...p, kaggle: false }));
-      });
+        anySuccess = true;
+      } catch {
+        newErrors.kaggle = true;
+      }
+
+      setData(newData);
+      setErrors(newErrors);
+      if (!anySuccess) setLoading(false);
+      else setLoading(false);
+    };
+
+    fetchAll();
   }, []);
+
+  // Compute combined totals
+  useEffect(() => {
+    const totals = { github: 0, leetcode: 0, kaggle: 0 };
+    Object.values(data).forEach((d) => {
+      totals.github += d.github;
+      totals.leetcode += d.leetcode;
+      totals.kaggle += d.kaggle;
+    });
+    setCombinedData(totals);
+  }, [data]);
 
   const tabs: { id: Tab; label: string }[] = [
     { id: 'all', label: 'All' },
@@ -95,33 +114,24 @@ export default function ActivityHeatmaps() {
     { id: 'kaggle', label: 'Kaggle' },
   ];
 
-  const renderHeatmap = (
-    platform: 'github' | 'leetcode' | 'kaggle',
-    title: string,
-    data: Record<string, number>,
-    color: string,
-    link: string
-  ) => {
-    if (loading[platform]) {
-      return (
-        <div key={platform} className="space-y-4">
-          <h3 className="text-lg font-medium">{title}</h3>
-          <div className="h-[120px] bg-muted/50 rounded-lg animate-pulse" />
-        </div>
-      );
-    }
-    if (errors[platform]) {
-      return (
-        <div key={platform} className="space-y-4">
-          <h3 className="text-lg font-medium">{title}</h3>
-          <div className="h-[120px] bg-muted/50 rounded-lg flex items-center justify-center text-sm text-muted-foreground">
-            Failed to load data
-          </div>
-        </div>
-      );
-    }
-    return <Heatmap key={platform} data={data} title={title} color={color} link={link} />;
+  const getHeatmapData = (platform: Platform | 'all'): Record<string, number> => {
+    const result: Record<string, number> = {};
+    Object.entries(data).forEach(([date, d]) => {
+      if (platform === 'all') {
+        result[date] = d.github + d.leetcode + d.kaggle;
+      } else {
+        result[date] = d[platform];
+      }
+    });
+    return result;
   };
+
+  const getColor = (platform: Platform | 'all'): string => {
+    if (platform === 'all') return '160, 160, 170';
+    return PLATFORMS[platform].color;
+  };
+
+  const hasErrors = errors.github || errors.leetcode || errors.kaggle;
 
   return (
     <section className="space-y-8">
@@ -145,14 +155,43 @@ export default function ActivityHeatmaps() {
         ))}
       </div>
 
-      <div className="space-y-8">
-        {(activeTab === 'all' || activeTab === 'github') &&
-          renderHeatmap('github', 'GitHub Contributions', githubData, '34, 197, 94', `https://github.com/${GITHUB_USERNAME}`)}
-        {(activeTab === 'all' || activeTab === 'leetcode') &&
-          renderHeatmap('leetcode', 'LeetCode Submissions', leetcodeData, '249, 115, 22', `https://leetcode.com/${LEETCODE_USERNAME}`)}
-        {(activeTab === 'all' || activeTab === 'kaggle') &&
-          renderHeatmap('kaggle', 'Kaggle Activity', kaggleData, '59, 130, 246', `https://www.kaggle.com/${KAGGLE_USERNAME}`)}
-      </div>
+      {loading && (
+        <div className="h-[120px] bg-muted/50 rounded-lg animate-pulse" />
+      )}
+
+      {!loading && hasErrors && (
+        <p className="text-sm text-muted-foreground">
+          Some data failed to load. Showing available data.
+        </p>
+      )}
+
+      {!loading && activeTab === 'all' && (
+        <Heatmap
+          data={getHeatmapData('all')}
+          title="Combined Activity"
+          color={getColor('all')}
+        />
+      )}
+
+      {!loading && activeTab !== 'all' && (
+        <Heatmap
+          data={getHeatmapData(activeTab as Platform)}
+          title={`${PLATFORMS[activeTab as Platform].label} Activity`}
+          color={getColor(activeTab as Platform)}
+          link={PLATFORMS[activeTab as Platform].link}
+        />
+      )}
+
+      {!loading && activeTab === 'all' && (
+        <div className="grid grid-cols-3 gap-4 pt-4">
+          {(Object.keys(PLATFORMS) as Platform[]).map((platform) => (
+            <div key={platform} className="border border-border/50 p-4 rounded-xl text-center">
+              <div className="text-2xl font-bold">{combinedData[platform]}</div>
+              <div className="text-xs text-muted-foreground font-mono mt-1">{PLATFORMS[platform].label}</div>
+            </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 }
