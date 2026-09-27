@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, Github, Linkedin, Mail, FileText, Trophy, GitFork } from "lucide-react";
 import AllProjects from "@/components/AllProjects";
+import ActivityHeatmaps from "@/components/ActivityHeatmaps";
 
 export default function Home() {
   return (
@@ -160,6 +161,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Activity Heatmaps */}
+        <ActivityHeatmaps />
 
         {/* Experience & Achievements */}
         <section className="grid md:grid-cols-2 gap-16">
