@@ -1,43 +1,42 @@
 import { NextResponse } from 'next/server';
 
 const LEETCODE_USERNAME = 'U-Coder';
+const LEETCODE_SESSION = process.env.LEETCODE_SESSION || '';
+const LEETCODE_CSRF = process.env.LEETCODE_CSRF || '';
 
 export async function GET() {
   try {
-    const res = await fetch(`https://leetcode.com/${LEETCODE_USERNAME}`, {
+    const res = await fetch('https://leetcode.com/graphql', {
+      method: 'POST',
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        'Content-Type': 'application/json',
+        Cookie: `LEETCODE_SESSION=${LEETCODE_SESSION}; csrftoken=${LEETCODE_CSRF}`,
+        'x-csrftoken': LEETCODE_CSRF,
       },
+      body: JSON.stringify({
+        query: `query userProfile($username: String!) {
+          matchedUser(username: $username) {
+            username
+            submitStats: submitStatsGlobal {
+              acSubmissionNum {
+                difficulty
+                count
+                submissions
+              }
+            }
+          }
+          recentSubmissionList(username: $username, limit: 200) {
+            title
+            titleSlug
+            timestamp
+            statusDisplay
+          }
+        }`,
+        variables: { username: LEETCODE_USERNAME },
+      }),
     });
-    const html = await res.text();
-
-    const submissions: { title: string; timestamp: string; statusDisplay: string }[] = [];
-
-    // Extract submission calendar data from the page
-    const calendarMatch = html.match(/submissionCalendar["\s:=]+({[^}]+})/);
-    if (calendarMatch) {
-      try {
-        const calendarData = JSON.parse(calendarMatch[1].replace(/'/g, '"'));
-        Object.entries(calendarData).forEach(([timestamp]) => {
-          submissions.push({
-            title: 'Submission',
-            timestamp,
-            statusDisplay: 'Accepted',
-          });
-        });
-      } catch {}
-    }
-
-    // Also look for recent submissions in the page
-    const submissionMatches = html.matchAll(/titleSlug["\s:=]+["']([^"']+)["'][^}]*timestamp["\s:=]+["']([\d]+)["']/g);
-    Array.from(submissionMatches).forEach((match) => {
-      submissions.push({
-        title: match[1],
-        timestamp: match[2],
-        statusDisplay: 'Accepted',
-      });
-    });
-
+    const json = await res.json();
+    const submissions = json?.data?.recentSubmissionList || [];
     return NextResponse.json({ submissions });
   } catch {
     return NextResponse.json({ submissions: [] });
