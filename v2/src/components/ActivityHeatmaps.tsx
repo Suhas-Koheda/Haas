@@ -18,6 +18,7 @@ export default function ActivityHeatmaps() {
   const [activeTab, setActiveTab] = useState<Tab>('all');
   const [data, setData] = useState<Record<string, DayData>>({});
   const [loading, setLoading] = useState(true);
+  const [errors, setErrors] = useState<Record<Platform, boolean>>({ github: false, leetcode: false, kaggle: false });
 
   useEffect(() => {
     const fetchAll = async () => {
@@ -32,7 +33,9 @@ export default function ActivityHeatmaps() {
           if (!newData[date]) newData[date] = { github: 0, leetcode: 0, kaggle: 0 };
           newData[date].github++;
         });
-      } catch {}
+      } catch {
+        setErrors((p) => ({ ...p, github: true }));
+      }
 
       // LeetCode
       try {
@@ -43,7 +46,9 @@ export default function ActivityHeatmaps() {
           if (!newData[date]) newData[date] = { github: 0, leetcode: 0, kaggle: 0 };
           newData[date].leetcode++;
         });
-      } catch {}
+      } catch {
+        setErrors((p) => ({ ...p, leetcode: true }));
+      }
 
       // Kaggle
       try {
@@ -57,7 +62,9 @@ export default function ActivityHeatmaps() {
             newData[date].kaggle++;
           }
         });
-      } catch {}
+      } catch {
+        setErrors((p) => ({ ...p, kaggle: true }));
+      }
 
       setData(newData);
       setLoading(false);
@@ -129,6 +136,7 @@ export default function ActivityHeatmaps() {
           data={getHeatmapData('all')}
           title="Combined Activity"
           color={getColor('all')}
+          dayData={data}
         />
       )}
 
@@ -150,6 +158,12 @@ export default function ActivityHeatmaps() {
             </div>
           ))}
         </div>
+      )}
+
+      {!loading && activeTab === 'all' && (errors.leetcode || errors.kaggle) && (
+        <p className="text-xs text-muted-foreground">
+          Note: LeetCode and Kaggle APIs limit historical data without authentication. GitHub shows full history.
+        </p>
       )}
     </section>
   );
