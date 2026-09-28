@@ -5,21 +5,42 @@ const GITHUB_TOKEN = process.env.GITHUB_TOKEN || '';
 
 export async function GET() {
   try {
-    const allEvents = [];
-    for (let page = 1; page <= 10; page++) {
-      const res = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/events?per_page=100&page=${page}`, {
-        headers: {
-          Accept: 'application/vnd.github.v3+json',
-          Authorization: `Bearer ${GITHUB_TOKEN}`,
-        },
+    const res = await fetch('https://api.github.com/graphql', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${GITHUB_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        query: `query {
+          user(login: "${GITHUB_USERNAME}") {
+            contributionsCollection {
+              contributionCalendar {
+                totalContributions
+                weeks {
+                  contributionDays {
+                    date
+                    contributionCount
+                  }
+                }
+              }
+            }
+          }
+        }`,
+      }),
+    });
+    const json = await res.json();
+    const calendar = json?.data?.user?.contributionsCollection?.contributionCalendar;
+    if (!calendar) return NextResponse.json({ events: [] });
+    const events = [];
+    calendar.weeks.forEach((week) => {
+      week.contributionDays.forEach((day) => {
+        for (let i = 0; i < day.contributionCount; i++) {
+          events.push({ created_at: `${day.date}T12:00:00Z` });
+        }
       });
-      if (!res.ok) break;
-      const events = await res.json();
-      if (events.length === 0) break;
-      allEvents.push(...events);
-      if (events.length < 100) break;
-    }
-    return NextResponse.json({ events: allEvents });
+    });
+    return NextResponse.json({ events });
   } catch {
     return NextResponse.json({ events: [] });
   }
