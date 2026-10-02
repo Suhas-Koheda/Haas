@@ -11,7 +11,7 @@ interface PortfolioProps {
 }
 
 function PortfolioContent({ data }: PortfolioProps) {
-  const { colors } = useTheme();
+  const { colors, mode } = useTheme();
   const [logUrl, setLogUrl] = useState<string | null>(null);
 
   useEffect(() => {
