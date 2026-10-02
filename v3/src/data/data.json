@@ -1,0 +1,474 @@
+{
+  "theme": "monochrome",
+  "github": "suhas-koheda",
+  "illustration": false,
+  "profile": {
+    "name": "Suhas Koheda",
+    "handle": "suhas-koheda",
+    "avatar": "/assets/suhas.jpeg",
+    "banner": "/assets/gradient1.jpg",
+    "bio": "AI Researcher & Engineer building intelligent systems, robust backends, and AI-native automation. Passionate about attention architectures, self-supervised learning, and open source.",
+    "location": "India",
+    "resumeUrl": "/resume.pdf",
+    "email": "sharmasuhas450@gmail.com"
+  },
+  "roles": [
+    "AI Researcher & Engineer",
+    "Backend Developer",
+    "ML Engineer",
+    "Open Source Contributor"
+  ],
+  "socials": [
+    {
+      "name": "GitHub",
+      "url": "https://github.com/suhas-koheda",
+      "icon": "github"
+    },
+    {
+      "name": "LinkedIn",
+      "url": "https://www.linkedin.com/in/ssk450/",
+      "icon": "linkedin"
+    },
+    {
+      "name": "Email",
+      "url": "mailto:sharmasuhas450@gmail.com",
+      "icon": "email"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Python",
+      "icon": "code",
+      "color": "#3776AB"
+    },
+    {
+      "name": "PyTorch",
+      "icon": "brain",
+      "color": "#EE4C2C"
+    },
+    {
+      "name": "FastAPI",
+      "icon": "zap",
+      "color": "#009688"
+    },
+    {
+      "name": "LangChain",
+      "icon": "layers",
+      "color": "#1C3C3C"
+    },
+    {
+      "name": "Spring Boot",
+      "icon": "server",
+      "color": "#6DB33F"
+    },
+    {
+      "name": "Kotlin",
+      "icon": "terminal",
+      "color": "#7F52FF"
+    },
+    {
+      "name": "TypeScript",
+      "icon": "code",
+      "color": "#3178C6"
+    },
+    {
+      "name": "React",
+      "icon": "globe",
+      "color": "#61DAFB"
+    },
+    {
+      "name": "PostgreSQL",
+      "icon": "database",
+      "color": "#4169E1"
+    },
+    {
+      "name": "Docker",
+      "icon": "package",
+      "color": "#2496ED"
+    },
+    {
+      "name": "Hugging Face",
+      "icon": "rocket",
+      "color": "#FFD21E"
+    },
+    {
+      "name": "Java",
+      "icon": "cpu",
+      "color": "#ED8B00"
+    }
+  ],
+  "experience": [
+    {
+      "company": "Daira Edtech",
+      "role": "AI/ML Development Intern",
+      "type": "Internship",
+      "period": "July \u2014 Oct 2025",
+      "location": "Remote",
+      "details": [
+        "Engineered AI tools using LangChain & RAG",
+        "Built document processing pipeline for 5,000+ resources",
+        "Reduced deployment time by 60% via CI/CD pipelines"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "VIT Chennai",
+      "degree": "Bachelor of Technology",
+      "field": "Computer Science (AI/ML)",
+      "period": "2023 \u2014 2027",
+      "location": "Chennai, India",
+      "grade": "9.0 CGPA",
+      "details": [
+        "Specializing in AI/ML",
+        "Actively contributing to open source, promoting accessible AI integration for the Java ecosystem"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "1",
+      "title": "Telugu Tiny Stories",
+      "slug": "telugu-tiny-stories",
+      "description": "A lightweight LLaMA-architecture language model implemented from scratch in PyTorch, trained on the Telugu subset of the TinyStories dataset with a custom BPE tokenizer.",
+      "image": "https://image.thum.io/get/width/1200/noanimate/https://github.com/Suhas-Koheda/telugu-tiny-stories",
+      "tags": [
+        "Python",
+        "PyTorch",
+        "Transformers"
+      ],
+      "github": "https://github.com/Suhas-Koheda/telugu-tiny-stories",
+      "demo": null,
+      "featured": true
+    },
+    {
+      "id": "2",
+      "title": "Project Questionaire",
+      "slug": "project-questionaire",
+      "description": "AI-powered interview question generator using LangGraph and Gemini AI. Analyzes project code, resume, and job description to generate HLD, LLD, behavioral, and project-specific questions.",
+      "image": "https://image.thum.io/get/width/1200/noanimate/https://github.com/Suhas-Koheda/project-questionaire",
+      "tags": [
+        "Python",
+        "LangGraph",
+        "Gemini AI"
+      ],
+      "github": "https://github.com/Suhas-Koheda/project-questionaire",
+      "demo": null,
+      "featured": true
+    },
+    {
+      "id": "3",
+      "title": "Telugu Speech Pipeline",
+      "slug": "speech-pipeline",
+      "description": "An automated, modular pipeline for curating high-quality Telugu speech datasets from YouTube channels with VAD, speaker diarization, and ASR transcription.",
+      "image": "https://image.thum.io/get/width/1200/noanimate/https://github.com/Suhas-Koheda/speech-pipeline",
+      "tags": [
+        "Python",
+        "PyAnote",
+        "Silero VAD"
+      ],
+      "github": "https://github.com/Suhas-Koheda/speech-pipeline",
+      "demo": null,
+      "featured": true
+    },
+    {
+      "id": "4",
+      "title": "AI Video Knowledge Editor",
+      "slug": "ai-video-editor",
+      "description": "An AI-powered video editor that enriches video content with contextual Knowledge Cards using Whisper, GLiNER, and semantic web retrieval.",
+      "image": "https://image.thum.io/get/width/1200/noanimate/https://github.com/Suhas-Koheda/video-editor",
+      "tags": [
+        "Python",
+        "FastAPI",
+        "PySide6"
+      ],
+      "github": "https://github.com/Suhas-Koheda/video-editor",
+      "demo": null,
+      "featured": true
+    },
+    {
+      "id": "5",
+      "title": "ResumeForge",
+      "slug": "resumeforge",
+      "description": "A professional LaTeX resume generator with an AI-powered node-based visual editor. Features live PDF preview, AI text polishing, and drag-and-drop canvas.",
+      "image": "https://image.thum.io/get/width/1200/noanimate/https://github.com/Suhas-Koheda/resumeforge",
+      "tags": [
+        "React",
+        "TypeScript",
+        "Vite"
+      ],
+      "github": "https://github.com/Suhas-Koheda/resumeforge",
+      "demo": null,
+      "featured": true
+    },
+    {
+      "id": "6",
+      "title": "Society Management",
+      "slug": "society-management",
+      "description": "Full-stack society complaint management system with admin dashboard. Features resident registration, complaint tracking with status history, admin analytics, and notice board with email notifications.",
+      "image": "https://image.thum.io/get/width/1200/noanimate/https://society-management-production-e949.up.railway.app",
+      "tags": [
+        "Python",
+        "FastAPI",
+        "React"
+      ],
+      "github": "https://github.com/Suhas-Koheda/society-management",
+      "demo": "https://society-management-production-e949.up.railway.app",
+      "featured": true
+    },
+    {
+      "id": "society-management",
+      "title": "Society Management",
+      "slug": "society-management",
+      "description": "Full-stack society complaint management system with admin dashboard. Features resident registration, complaint tracking with status history, admin analytics, and notice board with email notifications.",
+      "image": "https://image.thum.io/get/width/1200/noanimate/https://society-management-production-e949.up.railway.app",
+      "tags": [
+        "Python",
+        "FastAPI",
+        "React"
+      ],
+      "github": "https://github.com/Suhas-Koheda/society-management",
+      "demo": "https://society-management-production-e949.up.railway.app",
+      "featured": false
+    },
+    {
+      "id": "telugu-tiny-stories",
+      "title": "Telugu Tiny Stories",
+      "slug": "telugu-tiny-stories",
+      "description": "A lightweight LLaMA-architecture language model implemented from scratch in PyTorch, trained on the Telugu subset of the TinyStories dataset with custom BPE tokenizer.",
+      "image": "https://image.thum.io/get/width/1200/noanimate/https://github.com/Suhas-Koheda/telugu-tiny-stories",
+      "tags": [
+        "Python",
+        "PyTorch",
+        "Transformers"
+      ],
+      "github": "https://github.com/Suhas-Koheda/telugu-tiny-stories",
+      "demo": null,
+      "featured": false
+    },
+    {
+      "id": "project-questionaire",
+      "title": "Project Questionaire",
+      "slug": "project-questionaire",
+      "description": "AI-powered interview question generator using LangGraph and Gemini AI. Analyzes project code, resume, and job description to generate HLD, LLD, behavioral, and project-specific questions.",
+      "image": "https://image.thum.io/get/width/1200/noanimate/https://github.com/Suhas-Koheda/project-questionaire",
+      "tags": [
+        "Python",
+        "LangGraph",
+        "Gemini AI"
+      ],
+      "github": "https://github.com/Suhas-Koheda/project-questionaire",
+      "demo": null,
+      "featured": false
+    },
+    {
+      "id": "speech-pipeline",
+      "title": "Telugu Speech Pipeline",
+      "slug": "speech-pipeline",
+      "description": "An automated, modular pipeline for curating high-quality Telugu speech datasets from YouTube channels with VAD, speaker diarization, and ASR transcription.",
+      "image": "https://image.thum.io/get/width/1200/noanimate/https://github.com/Suhas-Koheda/speech-pipeline",
+      "tags": [
+        "Python",
+        "PyAnote",
+        "Silero VAD"
+      ],
+      "github": "https://github.com/Suhas-Koheda/speech-pipeline",
+      "demo": null,
+      "featured": false
+    },
+    {
+      "id": "s2s-dataset-builder",
+      "title": "Telugu to Hindi S2S Dataset",
+      "slug": "s2s-dataset-builder",
+      "description": "An automated parallel Speech-to-Speech dataset pipeline running on Kaggle T4 GPUs to stream, translate, and synthesize multilingual audio datasets.",
+      "image": "https://image.thum.io/get/width/1200/noanimate//blog/parallel-dataset",
+      "tags": [
+        "Python",
+        "PyTorch",
+        "IndicTrans2"
+      ],
+      "github": "https://github.com/Suhas-Koheda/deeplearning",
+      "demo": "/blog/parallel-dataset",
+      "featured": false
+    },
+    {
+      "id": "ai-video-editor",
+      "title": "AI Video Knowledge Editor",
+      "slug": "ai-video-editor",
+      "description": "An AI-powered video editor that enriches video content with contextual Knowledge Cards using Whisper, GLiNER, and semantic web retrieval.",
+      "image": "https://image.thum.io/get/width/1200/noanimate/https://github.com/Suhas-Koheda/video-editor",
+      "tags": [
+        "Python",
+        "FastAPI",
+        "PySide6"
+      ],
+      "github": "https://github.com/Suhas-Koheda/video-editor",
+      "demo": null,
+      "featured": false
+    },
+    {
+      "id": "resumeforge",
+      "title": "ResumeForge",
+      "slug": "resumeforge",
+      "description": "A professional LaTeX resume generator with an AI-powered node-based visual editor. Features live PDF preview, AI text polishing, and drag-and-drop canvas.",
+      "image": "https://image.thum.io/get/width/1200/noanimate/https://github.com/Suhas-Koheda/resumeforge",
+      "tags": [
+        "React",
+        "TypeScript",
+        "Vite"
+      ],
+      "github": "https://github.com/Suhas-Koheda/resumeforge",
+      "demo": null,
+      "featured": false
+    },
+    {
+      "id": "indian-legal-analytics",
+      "title": "Indian Legal Analytics",
+      "slug": "indian-legal-analytics",
+      "description": "A comprehensive dashboard for analyzing Supreme Court legal cases with advanced analytics and Gemini-powered legal assistant.",
+      "image": "https://image.thum.io/get/width/1200/noanimate/https://github.com/Suhas-Koheda/Indian-Legal-Analytics",
+      "tags": [
+        "Python",
+        "Streamlit",
+        "LangChain"
+      ],
+      "github": "https://github.com/Suhas-Koheda/Indian-Legal-Analytics",
+      "demo": null,
+      "featured": false
+    },
+    {
+      "id": "moviebuff",
+      "title": "MovieBuff",
+      "slug": "moviebuff",
+      "description": "Cross-platform movie browsing application supporting Android, iOS, and Desktop using Kotlin Multiplatform with shared business logic.",
+      "image": "https://image.thum.io/get/width/1200/noanimate/https://github.com/Suhas-Koheda/MBuff",
+      "tags": [
+        "Kotlin Multiplatform",
+        "Compose",
+        "Ktor"
+      ],
+      "github": "https://github.com/Suhas-Koheda/MBuff",
+      "demo": null,
+      "featured": false
+    },
+    {
+      "id": "langchain4j-gemini-starter",
+      "title": "LangChain4j Gemini Starter",
+      "slug": "langchain4j-gemini-starter",
+      "description": "Spring Boot starter configuration for Google Gemini AI within LangChain4j, published to Maven Central and used by 260+ developers.",
+      "image": "https://image.thum.io/get/width/1200/noanimate/https://central.sonatype.com/artifact/dev.langchain4j/langchain4j-spring-boot-starter-vertex-ai-gemini",
+      "tags": [
+        "Java",
+        "Spring Boot",
+        "LangChain4j"
+      ],
+      "github": "https://github.com/langchain4j/langchain4j-spring/tree/main/langchain4j-spring-boot-starter-vertex-ai-gemini",
+      "demo": "https://central.sonatype.com/artifact/dev.langchain4j/langchain4j-spring-boot-starter-vertex-ai-gemini",
+      "featured": false
+    },
+    {
+      "id": "habit-tracker-backend",
+      "title": "Habit Tracker Backend",
+      "slug": "habit-tracker-backend",
+      "description": "JWT-authenticated REST API with habit tracking using Exposed ORM for improved performance.",
+      "image": "https://image.thum.io/get/width/1200/noanimate/https://github.com/Suhas-Koheda/HabitTrackerBackend",
+      "tags": [
+        "Kotlin",
+        "Ktor",
+        "PostgreSQL"
+      ],
+      "github": "https://github.com/Suhas-Koheda/HabitTrackerBackend",
+      "demo": null,
+      "featured": false
+    },
+    {
+      "id": "lms-java",
+      "title": "Library Management System",
+      "slug": "lms-java",
+      "description": "Automates library resource management including book inventory, member registrations, and transactions.",
+      "image": "https://image.thum.io/get/width/1200/noanimate/https://github.com/Suhas-Koheda/LMS-Java",
+      "tags": [
+        "Java",
+        "Spring Boot",
+        "Thymeleaf"
+      ],
+      "github": "https://github.com/Suhas-Koheda/LMS-Java",
+      "demo": null,
+      "featured": false
+    },
+    {
+      "id": "youtube-manager",
+      "title": "YouTube Content Manager",
+      "slug": "youtube-manager",
+      "description": "AI-powered assistant generating engaging, SEO-optimized video titles and descriptions using GitHub AI models.",
+      "image": "https://image.thum.io/get/width/1200/noanimate/https://github.com/Suhas-Koheda/YoutubeGenerator",
+      "tags": [
+        "React",
+        "FastAPI",
+        "Gemini AI"
+      ],
+      "github": "https://github.com/Suhas-Koheda/YoutubeGenerator",
+      "demo": null,
+      "featured": false
+    }
+  ],
+  "blogs": [
+    {
+      "slug": "attention-mechanism-kv-cache",
+      "title": "Deep Dive: Attention Mechanism & KV Cache",
+      "date": "May 25, 2026",
+      "excerpt": "A detailed interactive notebook explaining Multi-Query Attention and KV cache indexing from scratch.",
+      "tags": [
+        "Attention",
+        "Transformers",
+        "KV Cache"
+      ],
+      "coverImage": "/assets/gradient2.jpg",
+      "readingTime": "10 min"
+    },
+    {
+      "slug": "parallel-dataset",
+      "title": "Telugu to Hindi S2S Dataset Builder",
+      "date": "Jun 6, 2026",
+      "excerpt": "A Jupyter notebook demonstrating the creation of a Telugu to Hindi parallel Speech-to-Speech (S2S) dataset.",
+      "tags": [
+        "Speech",
+        "Dataset",
+        "Hindi"
+      ],
+      "coverImage": "/assets/gradient4.jpg",
+      "readingTime": "12 min"
+    },
+    {
+      "slug": "GO",
+      "title": "Why Does Your Go Server Log /favicon.ico Requests?",
+      "date": "Jul 5, 2025",
+      "excerpt": "Understanding browser behavior with favicon requests and how to handle them in Go.",
+      "tags": [
+        "Go",
+        "Web"
+      ],
+      "coverImage": "/assets/gradient1.jpg",
+      "readingTime": "4 min"
+    },
+    {
+      "slug": "Writing and Publishing Gradle Plugins",
+      "title": "Writing and Publishing Gradle Plugins",
+      "date": "Jul 5, 2025",
+      "excerpt": "A comprehensive guide to creating and publishing your own Gradle plugins.",
+      "tags": [
+        "Gradle",
+        "Java",
+        "Open Source"
+      ],
+      "coverImage": "/assets/gradient3.jpg",
+      "readingTime": "8 min"
+    }
+  ],
+  "quotes": [
+    "Simplicity is the ultimate sophistication.",
+    "First, solve the problem. Then, write the code.",
+    "Make it work, make it right, make it fast.",
+    "The best way to predict the future is to invent it."
+  ]
+}
