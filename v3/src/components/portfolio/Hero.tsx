@@ -34,7 +34,7 @@ export default function Hero({ profile, roles, socials }: HeroProps) {
           whileHover={{ scale: 1.02 }}
           src={profile.avatar}
           alt={profile.name}
-          className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl object-cover border shadow"
+          className="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl object-cover border shadow"
           style={{ borderColor: `${colors.foreground}1a` }}
         />
         <div className="flex-1 min-w-0">
