@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { ThemeProvider, useTheme } from "../../context/ThemeContext";
 import { ANIMATION } from "../../lib/constants";
+import { log, flushLogsToGitHub } from "../../lib/logger";
 import { Hero, Experience, Education, Projects, SkillSlider, Blog, Footer, GitHubChart, SpotifyWidget, IllustrationOverlay } from "./index";
 import type { PortfolioData } from "../../types/portfolio";
 
@@ -10,13 +12,21 @@ interface PortfolioProps {
 
 function PortfolioContent({ data }: PortfolioProps) {
   const { colors } = useTheme();
+  const [logUrl, setLogUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    log(`page loaded (${window.location.pathname})`);
+    const onUnload = () => log("page unloaded");
+    window.addEventListener("beforeunload", onUnload);
+    return () => window.removeEventListener("beforeunload", onUnload);
+  }, []);
 
   return (
     <div style={{ backgroundColor: colors.background, minHeight: "100vh" }}>
       <div
         className="fixed inset-0 pointer-events-none"
         style={{
-          backgroundImage: `radial-gradient(circle, ${colors.foreground}2e 1.2px, transparent 1.2px)`,
+          backgroundImage: `radial-gradient(circle, ${mode === "dark" ? `${colors.foreground}14` : `${colors.foreground}45`} 1.2px, transparent 1.2px)`,
           backgroundSize: "14px 14px",
         }}
       />
@@ -55,6 +65,20 @@ function PortfolioContent({ data }: PortfolioProps) {
       </motion.div>
 
       {data.illustration && <IllustrationOverlay />}
+      <button
+        onClick={async () => {
+          const url = await flushLogsToGitHub();
+          if (url) setLogUrl(url);
+        }}
+        className="fixed bottom-4 left-4 z-50 px-3 py-1.5 rounded-lg text-xs font-medium border backdrop-blur-md cursor-pointer"
+        style={{
+          backgroundColor: "rgba(255,255,255,0.7)",
+          borderColor: "rgba(0,0,0,0.1)",
+          color: "#0a0a0a",
+        }}
+      >
+        {logUrl ? "Logs uploaded ✓" : "Upload logs"}
+      </button>
     </div>
   );
 }
