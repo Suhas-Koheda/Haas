@@ -16,9 +16,13 @@ function PortfolioContent({ data }: PortfolioProps) {
 
   useEffect(() => {
     log(`page loaded (${window.location.pathname})`);
-    const onUnload = () => log("page unloaded");
+    const interval = setInterval(() => { void flushLogsToGitHub(); }, 60_000);
+    const onUnload = () => { log("page unloaded"); void flushLogsToGitHub(); };
     window.addEventListener("beforeunload", onUnload);
-    return () => window.removeEventListener("beforeunload", onUnload);
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("beforeunload", onUnload);
+    };
   }, []);
 
   return (
@@ -65,20 +69,6 @@ function PortfolioContent({ data }: PortfolioProps) {
       </motion.div>
 
       {data.illustration && <IllustrationOverlay />}
-      <button
-        onClick={async () => {
-          const url = await flushLogsToGitHub();
-          if (url) setLogUrl(url);
-        }}
-        className="fixed bottom-4 left-4 z-50 px-3 py-1.5 rounded-lg text-xs font-medium border backdrop-blur-md cursor-pointer"
-        style={{
-          backgroundColor: "rgba(255,255,255,0.7)",
-          borderColor: "rgba(0,0,0,0.1)",
-          color: "#0a0a0a",
-        }}
-      >
-        {logUrl ? "Logs uploaded ✓" : "Upload logs"}
-      </button>
     </div>
   );
 }
